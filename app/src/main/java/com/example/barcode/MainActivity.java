@@ -13,45 +13,52 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private FragmentManager fragmentManager = getSupportFragmentManager();
-    private Fragment1 fragment1 = new Fragment1();
-    private Fragment2 fragment2 = new Fragment2();
-    private Fragment3 fragment3 = new Fragment3();
-
+    private BottomNavigationView mBottomNV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayout, fragment2).commitAllowingStateLoss();
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
-    }
-
-    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-            switch(menuItem.getItemId())
-            {
-                case R.id.frige:
-                    transaction.replace(R.id.frameLayout, fragment1).commitAllowingStateLoss();
-
-                    break;
-                case R.id.home:
-                    transaction.replace(R.id.frameLayout, fragment2).commitAllowingStateLoss();
-                    break;
-                case R.id.recipe:
-                    transaction.replace(R.id.frameLayout, fragment3).commitAllowingStateLoss();
-                    break;
+        mBottomNV = findViewById(R.id.navigation);
+        mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                BottomNavigate(menuItem.getItemId());
+                return true;
             }
-            return true;
+        });
+        mBottomNV.setSelectedItemId(R.id.home);
+    }
+    private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
+        String tag = String.valueOf(id);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        Fragment currentFragment = fragmentManager.getPrimaryNavigationFragment();
+        if (currentFragment != null) {
+            fragmentTransaction.hide(currentFragment);
         }
 
+        Fragment fragment = fragmentManager.findFragmentByTag(tag);
+        if (fragment == null) {
+            if (id == R.id.frige) {
+                fragment = new Fragment1();
+
+            } else if (id == R.id.home){
+
+                fragment = new Fragment2();
+            }else {
+                fragment = new Fragment3();
+            }
+
+            fragmentTransaction.add(R.id.frameLayout, fragment, tag);
+        } else {
+            fragmentTransaction.show(fragment);
+        }
+
+        fragmentTransaction.setPrimaryNavigationFragment(fragment);
+        fragmentTransaction.setReorderingAllowed(true);
+        fragmentTransaction.commitNow();
     }
 }
