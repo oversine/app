@@ -19,10 +19,10 @@ public interface DaoBarcode {
     @Query("SELECT EXISTS (SELECT * FROM Barcode WHERE barcode =:input)AS SUCCESS") //입력값과 같은 컬럼 찾기
     boolean exists_check(String input);
 
-    // @Query("INSERT INTO Barcode(barcode, productname) VALUES(:barcode_ipt, :productname_ipt)") //test
-    //void Insert(String barcode_ipt, String productname_ipt);
-    // @Query("INSERT INTO barcode(barcode, productname, Barcode) VALUES(:barcode_ipt, :productname_ipt, :property_ipt)")
-    // void Insert(String barcode_ipt, String productname_ipt, String property_ipt);
+    @Query("INSERT INTO Barcode(barcode, productname) VALUES(:barcode_ipt, :productname_ipt)") //test
+    void Insert(String barcode_ipt, String productname_ipt);
+    @Query("INSERT INTO barcode(barcode, productname, Barcode) VALUES(:barcode_ipt, :productname_ipt, :property_ipt)")
+    void Insert(String barcode_ipt, String productname_ipt, String property_ipt);
 
     // @Delete
     // void nukeTable(Barcode... barcode);//튜플삭제

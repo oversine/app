@@ -17,14 +17,15 @@ public class barcode_res extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //Barcode_Database db = Room.databaseBuilder(this, Barcode_Database.class, "Barcode-1.2.db").allowMainThreadQueries().build(); //sqlite 직접입력
-        Barcode_Database db = Room.databaseBuilder(this, Barcode_Database.class,"Barcode-1.2.db" ).createFromAsset("Barcode.db").build(); // sqlite csv import
+        Barcode_Database db = Room.databaseBuilder(this, Barcode_Database.class, "Barcode-1.2.1.db").allowMainThreadQueries().build(); //sqlite 직접입력
+        //Barcode_Database db = Room.databaseBuilder(this, Barcode_Database.class,"Barcode-1.2.db" ).createFromAsset("Barcode.db").build(); // sqlite csv import
 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_res);
 
-        //db.daoBarcode().Insert("9788935304493","데이터베이스론", "책"); //임의로 넣은 값 (테스트용
+        db.daoBarcode().Insert("9791162242971","test1", "test"); //임의로 넣은 값 (테스트용
+        db.daoBarcode().Insert("9791156642428","test2", "test"); //임의로 넣은 값 (테스트용
         Intent intent = getIntent();
         String data = intent.getStringExtra("바코드값");
 
