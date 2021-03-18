@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,9 @@ import androidx.room.Room;
 import java.util.Calendar;
 
 public class barcode_res extends AppCompatActivity {
+
+    Button save;
+    TextView textView1, textView6, tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +42,27 @@ public class barcode_res extends AppCompatActivity {
             Toast.makeText(this, result, Toast.LENGTH_LONG).show();
         }
             else {
-                TextView textView1 = (TextView) findViewById(R.id.textView2) ;
-                textView1.setText(result);
+                textView1 = findViewById(R.id.textView2);
+                textView1.setText(result_pd);
+                textView6 = findViewById(R.id.textView6);
+                textView6.setText(result_pp);
         }
 
             // 날짜를 출력하는 텍스트뷰에 오늘 날짜 설정.
-            TextView tv = findViewById(R.id.date);
+            tv = findViewById(R.id.date);
             Calendar cal = Calendar.getInstance();
             tv.setText(cal.get(Calendar.YEAR) +"-"+ (cal.get(Calendar.MONTH)+1) +"-"+ cal.get(Calendar.DATE));
+
+
+            save = findViewById(R.id.save);
+            save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Database db = new Database(barcode_res.this);
+                    db.addPN(textView1.getText().toString().trim(), textView6.getText().toString().trim(), tv.getText().toString().trim());
+                }
+            });
+
         }
 
         DatePickerDialog.OnDateSetListener mDateSetListener =
