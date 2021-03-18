@@ -29,12 +29,14 @@ public class Fragment2 extends Fragment {
         testBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), temp.class);
+                Intent intent = new Intent(getActivity(), SqlConnect.class);
                 startActivity(intent);
             }
         });
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

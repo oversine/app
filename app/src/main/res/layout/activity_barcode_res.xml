@@ -41,10 +41,10 @@
 
     <TextView
         android:id="@+id/date"
-        android:layout_width="64dp"
-        android:layout_height="9dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginBottom="208dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginBottom="216dp"
         android:text="TextView"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"

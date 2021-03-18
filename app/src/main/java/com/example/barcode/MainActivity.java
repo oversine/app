@@ -22,11 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         /////////////////////////////////////
-        temp = findViewById(R.id.button);
-        temp.setOnClickListener(view ->{
-            Intent intent = new Intent(this, SqlConnect.class);
-            startActivity(intent);
-        });
+
         //////////////////////////////////////
         mBottomNV = findViewById(R.id.navigation);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
