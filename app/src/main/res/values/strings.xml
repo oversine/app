@@ -3,4 +3,6 @@
     <string name="scan_btn">바코드 스캔</string>
     <string name="keep">보관중인 식재료</string>
     <string name="recommend">추천 레시피</string>
+    <string name="textview">TextView</string>
+    <string name="button">Button</string>
 </resources>
