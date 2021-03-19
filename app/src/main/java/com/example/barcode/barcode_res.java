@@ -16,6 +16,7 @@ import java.util.Calendar;
 public class barcode_res extends AppCompatActivity {
 
     Button save;
+    Button addProduct;
     TextView textView1, textView6, tv;
 
     @Override
@@ -60,10 +61,23 @@ public class barcode_res extends AppCompatActivity {
                 public void onClick(View v) {
                     Database db = new Database(barcode_res.this);
                     db.addPN(textView1.getText().toString().trim(), textView6.getText().toString().trim(), tv.getText().toString().trim());
+                    finish();
                 }
             });
 
+            addProduct = findViewById(R.id.addProduct);
+            addProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Database db = new Database(barcode_res.this);
+                db.addPN(textView1.getText().toString().trim(), textView6.getText().toString().trim(), tv.getText().toString().trim());
+                Intent intent = new Intent(v.getContext(), scan.class);
+                startActivity(intent);
+            }
+        });
+
         }
+
 
         DatePickerDialog.OnDateSetListener mDateSetListener =
                 new DatePickerDialog.OnDateSetListener() {
