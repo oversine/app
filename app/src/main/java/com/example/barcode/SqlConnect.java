@@ -15,11 +15,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONArray;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class SqlConnect extends AppCompatActivity {
 
@@ -38,11 +44,14 @@ public class SqlConnect extends AppCompatActivity {
         dt = new BackgroundTask();
 
         try {
-            res.setText("");
             bt.setOnClickListener(view -> {
-                dt.execute();
-                String temp = dt.result;
-                res.setText(temp);
+                try {
+                    getData(dt.execute().get());
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
             });
         }catch(Exception e){
@@ -52,47 +61,58 @@ public class SqlConnect extends AppCompatActivity {
         }
     }
 
-    //모든회원에 대한 정보를 가져오기 위한 쓰레드
+    static public ArrayList getData(String input){
+        String JSON_TAG = "webnautes";
+        String BARCODE_TAG = "barcode";
+        String PRODUCTNAME_TAG = "productname";
+        ArrayList result = new ArrayList();
+        try {
+            JSONObject jsonObject = new JSONObject(input);
+            JSONArray jsonArray = jsonObject.getJSONArray(JSON_TAG);
+
+            for(int i =0; i<jsonArray.length(); i++){
+                JSONObject item = jsonArray.getJSONObject(i);
+                result.add(item.getString(BARCODE_TAG));
+                //System.out.println(item.getString(BARCODE_TAG)); test
+                result.add(item.getString(PRODUCTNAME_TAG));
+            }
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        System.out.println("success");
+        return result;
+    }
+
     static class BackgroundTask extends AsyncTask<Void, Void, String> {
         String target;
-        String result;
 
         @Override
         protected void onPreExecute() {
-            //List.php은 파싱으로 가져올 웹페이지
-            target = "http://192.168.55.169/getjson.php";
+            target = "http://192.168.55.169/get_Barcode.php";
         }
 
         @Override
         protected String doInBackground(Void... voids) {
 
             try{
-                URL url = new URL("http://192.168.55.169/get_Barcode.php");//URL 객체 생성
+                URL url = new URL(target);
 
-                //URL을 이용해서 웹페이지에 연결하는 부분
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-
-                //바이트단위 입력스트림 생성 소스는 httpURLConnection
                 InputStream inputStream = httpURLConnection.getInputStream();
-
-                //웹페이지 출력물을 버퍼로 받음 버퍼로 하면 속도가 더 빨라짐
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String temp;
 
-                //문자열 처리를 더 빠르게 하기 위해 StringBuilder클래스를 사용함
                 StringBuilder stringBuilder = new StringBuilder();
 
-                //한줄씩 읽어서 stringBuilder에 저장함
                 while((temp = bufferedReader.readLine()) != null){
-                    stringBuilder.append(temp + "\n");//stringBuilder에 넣어줌
+                    stringBuilder.append(temp + "\n");
                 }
-
-                //사용했던 것도 다 닫아줌
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-                return stringBuilder.toString().trim();//trim은 앞뒤의 공백을 제거함
 
+                return stringBuilder.toString().trim();
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -105,8 +125,7 @@ public class SqlConnect extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            System.out.println(result);
-            this.result = result;
+
         }
 
     }

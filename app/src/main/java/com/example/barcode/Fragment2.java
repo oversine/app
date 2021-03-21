@@ -24,23 +24,12 @@ public class Fragment2 extends Fragment {
                 startActivity(intent);
             }
         });
-
-        Button testBtn = (Button) view.findViewById(R.id.test);
-        testBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SqlConnect.class);
-                startActivity(intent);
-            }
-        });
-        return view;
+          return view;
     }
-
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
     }
 }

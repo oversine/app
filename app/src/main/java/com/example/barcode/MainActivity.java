@@ -15,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
-    Button temp;
+    //Button temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
