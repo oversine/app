@@ -23,7 +23,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
-    Button temp;
+    //Button temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
