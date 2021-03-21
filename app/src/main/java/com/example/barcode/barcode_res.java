@@ -12,19 +12,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class barcode_res extends AppCompatActivity {
 
     Button save;
     Button addProduct;
     TextView textView1, textView6, tv;
+    RecyclerAdapter adapter;
+
+    List<TableList> table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         Barcode_Database db = Room.databaseBuilder(this, Barcode_Database.class, "Barcode-1.2.1.db").allowMainThreadQueries().build(); //sqlite 직접입력
         //Barcode_Database db = Room.databaseBuilder(this, Barcode_Database.class,"Barcode-1.2.db" ).createFromAsset("Barcode.db").build(); // sqlite csv import
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_res);
@@ -61,6 +64,8 @@ public class barcode_res extends AppCompatActivity {
                 public void onClick(View v) {
                     Database db = new Database(barcode_res.this);
                     db.addPN(textView1.getText().toString().trim(), textView6.getText().toString().trim(), tv.getText().toString().trim());
+                    adapter = new RecyclerAdapter(table);
+                    adapter.notifyDataSetChanged();
                     finish();
                 }
             });
@@ -71,8 +76,11 @@ public class barcode_res extends AppCompatActivity {
             public void onClick(View v) {
                 Database db = new Database(barcode_res.this);
                 db.addPN(textView1.getText().toString().trim(), textView6.getText().toString().trim(), tv.getText().toString().trim());
+                adapter = new RecyclerAdapter(table);
+                adapter.notifyDataSetChanged();
                 Intent intent = new Intent(v.getContext(), scan.class);
                 startActivity(intent);
+                finish();
             }
         });
 
