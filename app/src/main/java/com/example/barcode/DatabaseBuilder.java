@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class DatabaseBuilder { // 데이터베이스 빌더
     public static Barcode_Database db;
     public DatabaseBuilder(Context context) {
-        db = Room.databaseBuilder(context, Barcode_Database.class, "Barcode_1.0.0.db").allowMainThreadQueries().addMigrations().build();
+        db = Room.databaseBuilder(context, Barcode_Database.class, "Barcode_1.0.1.db").allowMainThreadQueries().addMigrations().build();
         System.out.println("createDb Success");
     }
     public Barcode_Database db_getter(){

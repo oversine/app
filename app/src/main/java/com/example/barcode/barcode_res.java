@@ -32,8 +32,8 @@ public class barcode_res extends AppCompatActivity {
         Intent intent = getIntent();
         String data = intent.getStringExtra("바코드값");
 
-        String result_pp = DatabaseBuilder.db.daoBarcode().search_barcode_ProductName(data);
-        String result_pd = DatabaseBuilder.db.daoBarcode().search_barcode(data);
+        String result_pp = DatabaseBuilder.db.daoBarcode().search_barcode_ProductName(data); //바코드번호
+        String result_pd = DatabaseBuilder.db.daoBarcode().search_barcode(data); //상품명
 
         String result = "상품명:\t"+result_pd +"\n\r"+ "카테고리:\t"+result_pp;
 
@@ -42,9 +42,17 @@ public class barcode_res extends AppCompatActivity {
         }
             else {
                 textView1 = findViewById(R.id.textView2);
-                textView1.setText(result_pd);
                 textView6 = findViewById(R.id.textView6);
-                textView6.setText(result_pp);
+                textView1.setText(result_pd);
+                if(result_pp.equals("8809570010141")){
+                    textView6.setText("닭가슴살");
+                }
+                else if(result_pp.equals("8801052053042")){
+                    textView6.setText("소시지");
+                }
+                else {
+                    textView6.setText(result_pp);
+                }
         }
 
             // 날짜를 출력하는 텍스트뷰에 오늘 날짜 설정.
