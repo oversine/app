@@ -35,7 +35,9 @@
             tools:replace="screenOrientation" />
         <activity android:name=".barcode_res" />
         <activity android:name=".scan" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SetActivity" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.zxing.client.android.SCAN" />

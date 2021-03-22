@@ -16,7 +16,7 @@ public class Fragment2 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        Button scanBtn = (Button) view.findViewById(R.id.barcode_scan);
+        Button scanBtn = view.findViewById(R.id.barcode_scan);
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -24,12 +24,12 @@ public class Fragment2 extends Fragment {
                 startActivity(intent);
             }
         });
-          return view;
+        return view;
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
     }
 }

@@ -12,12 +12,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class barcode_res extends AppCompatActivity {
 
     Button save;
     Button addProduct;
     TextView textView1, textView6, tv;
+    RecyclerAdapter adapter;
+
+    List<TableList> table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +58,8 @@ public class barcode_res extends AppCompatActivity {
 
             // 날짜를 출력하는 텍스트뷰에 오늘 날짜 설정.
             tv = findViewById(R.id.date);
-            Calendar cal = Calendar.getInstance();
-            tv.setText(cal.get(Calendar.YEAR) +"-"+ (cal.get(Calendar.MONTH)+1) +"-"+ cal.get(Calendar.DATE));
+             Calendar cal = Calendar.getInstance();
+             tv.setText(cal.get(Calendar.YEAR) +"-"+ (cal.get(Calendar.MONTH)+1) +"-"+ cal.get(Calendar.DATE));
 
 
             save = findViewById(R.id.save);
@@ -64,6 +68,8 @@ public class barcode_res extends AppCompatActivity {
                 public void onClick(View v) {
                     Database db = new Database(barcode_res.this);
                     db.addPN(textView1.getText().toString().trim(), textView6.getText().toString().trim(), tv.getText().toString().trim());
+                    adapter = new RecyclerAdapter(table);
+                    adapter.notifyDataSetChanged();
                     finish();
                 }
             });
@@ -74,8 +80,11 @@ public class barcode_res extends AppCompatActivity {
             public void onClick(View v) {
                 Database db = new Database(barcode_res.this);
                 db.addPN(textView1.getText().toString().trim(), textView6.getText().toString().trim(), tv.getText().toString().trim());
+                adapter = new RecyclerAdapter(table);
+                adapter.notifyDataSetChanged();
                 Intent intent = new Intent(v.getContext(), scan.class);
                 startActivity(intent);
+                finish();
             }
         });
 
