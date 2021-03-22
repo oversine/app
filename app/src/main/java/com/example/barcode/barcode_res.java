@@ -25,24 +25,15 @@ public class barcode_res extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//////
-        Barcode_Database db = Room.databaseBuilder(this, Barcode_Database.class, "Barcode-1.2.1.db").allowMainThreadQueries().addMigrations().build();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_res);
 
-        if(db.daoBarcode().exists_check("8809570010141")){}
-        else {
-            db.daoBarcode().Insert("8809570010141", "굽네 훈데 닭가슴살 오리지널", "닭가슴살"); //임의로 넣은 값 (테스트용
-            db.daoBarcode().Insert("8801052053042", "청정원 리치부어스트", "소시지"); //임의로 넣은 값 (테스트용
-            db.daoBarcode().Insert("8801019312021", "에이스", "맛있다!"); //임의로 넣은 값 (테스트용
-        }
-///////
         Intent intent = getIntent();
         String data = intent.getStringExtra("바코드값");
 
-        String result_pp = db.daoBarcode().search_barcode_ProductName(data);
-        String result_pd = db.daoBarcode().search_barcode(data);
+        String result_pp = DatabaseBuilder.db.daoBarcode().search_barcode_ProductName(data);
+        String result_pd = DatabaseBuilder.db.daoBarcode().search_barcode(data);
 
         String result = "상품명:\t"+result_pd +"\n\r"+ "카테고리:\t"+result_pp;
 

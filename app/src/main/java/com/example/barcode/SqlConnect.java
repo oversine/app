@@ -29,67 +29,21 @@ import java.util.concurrent.ExecutionException;
 
 public class SqlConnect extends AppCompatActivity {
 
-    Button bt;
-    TextView res;
-    BackgroundTask dt;
-
     @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sql_connect);
-
-        bt = findViewById(R.id.button_res);
-        res = (TextView)findViewById(R.id.textview_res);
-        dt = new BackgroundTask();
-
-        try {
-            bt.setOnClickListener(view -> {
-                try {
-                    getData(dt.execute().get());
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            });
-        }catch(Exception e){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            System.out.println(e.getMessage());
-        }
     }
 
-    static public ArrayList getData(String input){
-        String JSON_TAG = "webnautes";
-        String BARCODE_TAG = "barcode";
-        String PRODUCTNAME_TAG = "productname";
-        ArrayList result = new ArrayList();
-        try {
-            JSONObject jsonObject = new JSONObject(input);
-            JSONArray jsonArray = jsonObject.getJSONArray(JSON_TAG);
 
-            for(int i =0; i<jsonArray.length(); i++){
-                JSONObject item = jsonArray.getJSONObject(i);
-                result.add(item.getString(BARCODE_TAG));
-                //System.out.println(item.getString(BARCODE_TAG)); test
-                result.add(item.getString(PRODUCTNAME_TAG));
-            }
-
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        System.out.println("success");
-        return result;
-    }
-
-    static class BackgroundTask extends AsyncTask<Void, Void, String> {
+    public static class BackgroundTask extends AsyncTask<Void, Void, String> {
         String target;
 
         @Override
         protected void onPreExecute() {
-            target = "http://192.168.55.169/get_Barcode.php";
+            //target = "http://192.168.55.169/get_Barcode.php";
+            target = "http://180.71.251.148:8001/get_Barcode.php";
         }
 
         @Override

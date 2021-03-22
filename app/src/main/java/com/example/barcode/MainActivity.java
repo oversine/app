@@ -19,11 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
-    //Button temp;
+    DatabaseBuilder builder;
+    SqlConnect sqlConnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        ///////////////////////////////////// 앱 시작시 php서버에 접속하여 db를 불러와 room에 저장
+        builder = new DatabaseBuilder(this); //DB초기화
+        sqlConnect = new SqlConnect();               //객체생성
 
-        /////////////////////////////////////
-
+        SqlConnect.BackgroundTask task = new SqlConnect.BackgroundTask();
+        try {
+            builder.addtuples(builder.getData(task.execute().get()), builder.db);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //////////////////////////////////////
         mBottomNV = findViewById(R.id.navigation);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
