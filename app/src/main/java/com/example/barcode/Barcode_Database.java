@@ -8,3 +8,4 @@ public abstract class Barcode_Database extends RoomDatabase{
     public abstract DaoBarcode daoBarcode();
 
 }
+

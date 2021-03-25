@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 public class DbClasses {
 
     @Entity
-    class Barcode{
+    public class Barcode{
         @PrimaryKey
         private String barcode;
         private String productname;
@@ -37,53 +37,13 @@ public class DbClasses {
                     '}';
         }
     }
+
     @Entity
-    class IngredientName{
-
+    public class RecipeBasic{
         @PrimaryKey
-        private String materialname;
-        private String expirationdata, classfication;
-
-        public void setClassfication(@NonNull String classfication) {
-            this.classfication = classfication;
-        }
-
-        @Override
-        public String toString() {
-            return "IngredientName{" +
-                    "materialname='" + materialname + '\'' +
-                    ", expirationdata='" + expirationdata + '\'' +
-                    ", classfication='" + classfication + '\'' +
-                    '}';
-        }
-
-        public void setExpirationdata(@NonNull String expirationdata) {
-            this.expirationdata = expirationdata;
-        }
-
-        public void setMaterialname(@NonNull String materialname) {
-            this.materialname = materialname;
-        }
-
+        private String recipecode;
         @NonNull
-        public String getClassfication() {
-            return classfication;
-        }
-
-        @NonNull
-        public String getExpirationdata() {
-            return expirationdata;
-        }
-
-        @NonNull
-        public String getMaterialname() {
-            return materialname;
-        }
-    }
-    @Entity
-    class RecipeBasic{
-        @PrimaryKey
-        private String recipecode, recipename, simpleinfo, typecategory, foodcategory, cookingtime, imageurl ;
+        private String recipename, simpleinfo, typecategory, foodcategory, cookingtime, imageurl ;
 
         @NonNull
         public String getRecipecode() {
@@ -161,8 +121,9 @@ public class DbClasses {
                     '}';
         }
     }
+
     @Entity
-    class RecipeMaterial{
+    public class RecipeMaterial{
         @PrimaryKey
         private String recipecode, meterialname, meterialcapacity;
         private String meterialtype;
@@ -213,8 +174,9 @@ public class DbClasses {
             return meterialtype;
         }
     }
+
     @Entity
-    class RecipeProcess{
+    public class RecipeProcess{
         @PrimaryKey
         private String recipecode, outputsequence;
         private String cookingprocess, processimageurl;

@@ -38,14 +38,8 @@ public class MainActivity extends AppCompatActivity {
         builder = new DatabaseBuilder(this); //DB초기화
         sqlConnect = new SqlConnect();               //객체생성
 
-        SqlConnect.BackgroundTask task = new SqlConnect.BackgroundTask();
-        try {
-            builder.addtuples(builder.getData(task.execute().get()), builder.db);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        SqlConnect.Get_Barcode_php task = new SqlConnect.Get_Barcode_php();
+
         //////////////////////////////////////
         mBottomNV = findViewById(R.id.navigation);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte

@@ -3,6 +3,7 @@ package com.example.barcode;
 import android.content.Context;
 
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,16 +11,27 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class DatabaseBuilder { // 데이터베이스 빌더
-    public static Barcode_Database db;
+
+    //public static Barcode_Database db;
+    public static RoomDBClasses.Barcode_Database Barcode_DB;
+    public static RoomDBClasses.RecipeBasic_Database RecipeB_DB;
+    public static RoomDBClasses.RecipeMaterial_Database RecipeM_DB;
+    public static RoomDBClasses.RecipeProcess_Database RecipeP_DB;
+
     public DatabaseBuilder(Context context) {
-        db = Room.databaseBuilder(context, Barcode_Database.class, "Barcode_1.0.1.db").allowMainThreadQueries().addMigrations().build();
-        System.out.println("createDb Success");
-    }
-    public Barcode_Database db_getter(){
-        return db;
+        Barcode_DB = Room.databaseBuilder(context, RoomDBClasses.Barcode_Database.class, "Barcode_1.0.0.db").allowMainThreadQueries().addMigrations().build();
+        System.out.println("createBCDb Success");
+        RecipeB_DB = Room.databaseBuilder(context, RoomDBClasses.RecipeBasic_Database.class, "RecipeBasic_1.0.0.db").allowMainThreadQueries().addMigrations().build();
+        System.out.println("createRBDb Success");
+        RecipeM_DB = Room.databaseBuilder(context, RoomDBClasses.RecipeMaterial_Database.class, "RecipeBasic_1.0.0.db").allowMainThreadQueries().addMigrations().build();
+        System.out.println("createRMDb Success");
+        RecipeP_DB = Room.databaseBuilder(context, RoomDBClasses.RecipeProcess_Database.class, "RecipeBasic_1.0.0.db").allowMainThreadQueries().addMigrations().build();
+        System.out.println("createRPDb Success");
     }
 
+
     public ArrayList getData(String input) { //php에서 토큰 분리
+
         String JSON_TAG = "webnautes";
         String BARCODE_TAG = "barcode";
         String PRODUCTNAME_TAG = "productname";
@@ -35,7 +47,33 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 System.out.println(item.getString(BARCODE_TAG)); //test
                 result.add(item.getString(PRODUCTNAME_TAG));
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Barcode tokenizing success");
+        return result;
+    }
 
+    public ArrayList getRMData(String input) { //php에서 토큰 분리
+
+        String JSON_TAG = "webnautes";
+        String TAG_a = "recipecode";
+        String TAG_b = "meterialname";
+        String TAG_c = "meterialcapacity";
+        String TAG_d = "meterialtype";
+        ArrayList result = new ArrayList();
+
+        try {
+            JSONObject jsonObject = new JSONObject(input);
+            JSONArray jsonArray = jsonObject.getJSONArray(JSON_TAG);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject item = jsonArray.getJSONObject(i);
+                result.add(item.getString(TAG_a));
+                result.add(item.getString(TAG_b));
+                result.add(item.getString(TAG_c));
+                result.add(item.getString(TAG_d));
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -43,7 +81,68 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return result;
     }
 
-    public boolean addtuples(ArrayList input, Barcode_Database db) { //데이터베이스에 튜플 삽입
+    public ArrayList getRBData(String input) { //php에서 토큰 분리
+
+        String JSON_TAG = "webnautes";
+        String TAG_a ="recipecode";
+        String TAG_b ="recupename";
+        String TAG_c ="simpleinfo";
+        String TAG_d ="typecategory";
+        String TAG_e ="foodcategory";
+        String TAG_f ="cookingtime";
+        String TAG_g ="inageurl";
+        ArrayList result = new ArrayList();
+
+        try {
+            JSONObject jsonObject = new JSONObject(input);
+            JSONArray jsonArray = jsonObject.getJSONArray(JSON_TAG);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject item = jsonArray.getJSONObject(i);
+                result.add(item.getString(TAG_a));
+                result.add(item.getString(TAG_b));
+                result.add(item.getString(TAG_c));
+                result.add(item.getString(TAG_d));
+                result.add(item.getString(TAG_e));
+                result.add(item.getString(TAG_f));
+                result.add(item.getString(TAG_g));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("tokenizing success");
+        return result;
+    }
+
+    public ArrayList getRPData(String input) { //php에서 토큰 분리
+
+        String JSON_TAG = "webnautes";
+        String TAG_a ="recipecode";
+        String TAG_b ="outputsequence";
+        String TAG_c ="cookingprocess";
+        String TAG_d ="processimageurl";
+
+        ArrayList result = new ArrayList();
+
+        try {
+            JSONObject jsonObject = new JSONObject(input);
+            JSONArray jsonArray = jsonObject.getJSONArray(JSON_TAG);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject item = jsonArray.getJSONObject(i);
+                result.add(item.getString(TAG_a));
+                result.add(item.getString(TAG_b));
+                result.add(item.getString(TAG_c));
+                result.add(item.getString(TAG_d));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("tokenizing success");
+        return result;
+    }
+
+    public boolean addBCtuples(ArrayList input, Barcode_Database db) { //데이터베이스에 튜플 삽입
         String barcode ="";
         String pn ="";
         try {
@@ -65,4 +164,133 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         System.out.println("adding tuples success");
         return true;
     }
+
+    public boolean addRBtuples(ArrayList input, Barcode_Database db) { //데이터베이스에 튜플 삽입
+        String TAG_a ="";
+        String TAG_b ="";
+        String TAG_c ="";
+        String TAG_d ="";
+        String TAG_e ="";
+        String TAG_f ="";
+        String TAG_g ="";
+        try {
+            for (int i = 0; i < input.size(); i++) {
+
+                if(i%7 == 0){
+                    TAG_a = (String) input.get(i);
+                }
+                else if (i%7 == 1){
+                    TAG_b = (String) input.get(i);
+                }
+                else if(i%7 == 2){
+                    TAG_c = (String) input.get(i);
+                }
+                else if(i%7 == 3){
+                    TAG_d = (String) input.get(i);
+                }
+                else if(i%7 == 4){
+                    TAG_e = (String) input.get(i);
+                }
+                else if(i%7 == 5){
+                    TAG_f = (String) input.get(i);
+                }
+                else{
+                    TAG_g = (String) input.get(i);
+                }
+
+                if (TAG_a !="" && TAG_b !="" &&TAG_c !="" &&TAG_d !="" &&TAG_e !="" &&TAG_f !="" && TAG_g !="") {
+                    db.daoBarcode().InsertRB(TAG_a, TAG_b, TAG_c, TAG_d, TAG_e, TAG_f, TAG_g);
+                    TAG_a ="";
+                    TAG_b ="";
+                    TAG_c ="";
+                    TAG_d ="";
+                    TAG_e ="";
+                    TAG_f ="";
+                    TAG_g ="";
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        System.out.println("adding RBtuples success");
+        return true;
+    }
+
+    public boolean addRPtuples(ArrayList input, Barcode_Database db) { //데이터베이스에 튜플 삽입
+        String TAG_a ="";
+        String TAG_b ="";
+        String TAG_c ="";
+        String TAG_d ="";
+
+        try {
+            for (int i = 0; i < input.size(); i++) {
+
+                if(i%4 == 0){
+                    TAG_a = (String) input.get(i);
+                }
+                else if (i%74== 1){
+                    TAG_b = (String) input.get(i);
+                }
+                else if(i%4 == 2){
+                    TAG_c = (String) input.get(i);
+                }
+                else{
+                    TAG_d = (String) input.get(i);
+                }
+
+                if (TAG_a !="" && TAG_b !="" &&TAG_c !="" &&TAG_d !="") {
+                    db.daoBarcode().InsertRP(TAG_a, TAG_b, TAG_c, TAG_d);
+                    TAG_a ="";
+                    TAG_b ="";
+                    TAG_c ="";
+                    TAG_d ="";
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        System.out.println("adding tuples success");
+        return true;
+    }
+
+    public boolean addRMtuples(ArrayList input, Barcode_Database db) { //데이터베이스에 튜플 삽입
+        String TAG_a ="";
+        String TAG_b ="";
+        String TAG_c ="";
+        String TAG_d ="";
+
+        try {
+            for (int i = 0; i < input.size(); i++) {
+
+                if(i%4 == 0){
+                    TAG_a = (String) input.get(i);
+                }
+                else if (i%74== 1){
+                    TAG_b = (String) input.get(i);
+                }
+                else if(i%4 == 2){
+                    TAG_c = (String) input.get(i);
+                }
+                else{
+                    TAG_d = (String) input.get(i);
+                }
+
+                if (TAG_a !="" && TAG_b !="" &&TAG_c !="" &&TAG_d !="") {
+                    db.daoBarcode().InsertRM(TAG_a, TAG_b, TAG_c, TAG_d);
+                    TAG_a ="";
+                    TAG_b ="";
+                    TAG_c ="";
+                    TAG_d ="";
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        System.out.println("adding tuples success");
+        return true;
+    }
+
 }
