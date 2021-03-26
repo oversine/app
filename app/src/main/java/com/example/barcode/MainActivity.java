@@ -34,11 +34,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        ///////////////////////////////////// 앱 시작시 php서버에 접속하여 db를 불러와 room에 저장
+        ////////////////////////////////////// 앱 시작시 php서버에 접속하여 db를 불러와 room에 저장
         builder = new DatabaseBuilder(this); //DB초기화
         sqlConnect = new SqlConnect();               //객체생성
 
         SqlConnect.Get_Barcode_php task = new SqlConnect.Get_Barcode_php();
+        try {
+            builder.addBCtuples(builder.getBCData(task.execute().get()), DatabaseBuilder.Barcode_DB);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //////////////////////////////////////
         mBottomNV = findViewById(R.id.navigation);

@@ -9,8 +9,13 @@ public class DbClasses {
     @Entity
     public class Barcode{
         @PrimaryKey
+        @NonNull
         private String barcode;
         private String productname;
+
+        public String getProductname() { return productname; }
+
+        public void setProductname(String productname) { this.productname = productname; }
 
         public String getBarcode() {
             return barcode;
@@ -41,6 +46,7 @@ public class DbClasses {
     @Entity
     public class RecipeBasic{
         @PrimaryKey
+        @NonNull
         private String recipecode;
         @NonNull
         private String recipename, simpleinfo, typecategory, foodcategory, cookingtime, imageurl ;
@@ -122,9 +128,10 @@ public class DbClasses {
         }
     }
 
-    @Entity
+    @Entity(primaryKeys = {"recipecode", "meterialname", "meterialcapacity"})
     public class RecipeMaterial{
         @PrimaryKey
+        @NonNull
         private String recipecode, meterialname, meterialcapacity;
         private String meterialtype;
 
@@ -175,10 +182,12 @@ public class DbClasses {
         }
     }
 
-    @Entity
+    @Entity(primaryKeys  = {"recipecode", "outputsequence"})
     public class RecipeProcess{
         @PrimaryKey
+        @NonNull
         private String recipecode, outputsequence;
+
         private String cookingprocess, processimageurl;
 
         @Override

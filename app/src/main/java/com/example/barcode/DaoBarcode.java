@@ -8,6 +8,7 @@ import java.util.List;
 @Dao
 public interface DaoBarcode {
 
+    /*
     @Query("SELECT * FROM barcode")//전체검색
     List<Barcode> getAll();
 
@@ -17,7 +18,7 @@ public interface DaoBarcode {
     String search_barcode_ProductName(String input);
     @Query("SELECT EXISTS (SELECT * FROM Barcode WHERE barcode =:input)AS SUCCESS") //입력값과 같은 컬럼 찾기
     boolean exists_check(String input);
-
+    */
 
 
     @Query("INSERT INTO Barcode(barcode, productname) VALUES(:barcode, :productname)") //바코드 insert

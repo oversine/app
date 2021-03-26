@@ -30,7 +30,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
     }
 
 
-    public ArrayList getData(String input) { //php에서 토큰 분리
+    public ArrayList getBCData(String input) { //php에서 토큰 분리
 
         String JSON_TAG = "webnautes";
         String BARCODE_TAG = "barcode";
@@ -142,7 +142,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return result;
     }
 
-    public boolean addBCtuples(ArrayList input, Barcode_Database db) { //데이터베이스에 튜플 삽입
+    public boolean addBCtuples(ArrayList input, RoomDBClasses.Barcode_Database db) { //데이터베이스에 튜플 삽입
         String barcode ="";
         String pn ="";
         try {
@@ -165,7 +165,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return true;
     }
 
-    public boolean addRBtuples(ArrayList input, Barcode_Database db) { //데이터베이스에 튜플 삽입
+    public boolean addRBtuples(ArrayList input, RoomDBClasses.RecipeBasic_Database db) { //데이터베이스에 튜플 삽입
         String TAG_a ="";
         String TAG_b ="";
         String TAG_c ="";
@@ -217,7 +217,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return true;
     }
 
-    public boolean addRPtuples(ArrayList input, Barcode_Database db) { //데이터베이스에 튜플 삽입
+    public boolean addRPtuples(ArrayList input, RoomDBClasses.RecipeProcess_Database db) { //데이터베이스에 튜플 삽입
         String TAG_a ="";
         String TAG_b ="";
         String TAG_c ="";
@@ -255,7 +255,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return true;
     }
 
-    public boolean addRMtuples(ArrayList input, Barcode_Database db) { //데이터베이스에 튜플 삽입
+    public boolean addRMtuples(ArrayList input, RoomDBClasses.RecipeMaterial_Database db) { //데이터베이스에 튜플 삽입
         String TAG_a ="";
         String TAG_b ="";
         String TAG_c ="";
