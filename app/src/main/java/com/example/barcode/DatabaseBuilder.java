@@ -30,12 +30,12 @@ public class DatabaseBuilder { // 데이터베이스 빌더
     }
 
 
-    public ArrayList getBCData(String input) { //php에서 토큰 분리
+    public ArrayList<String> getBCData(String input) { //php에서 토큰 분리
 
         String JSON_TAG = "webnautes";
         String BARCODE_TAG = "barcode";
         String PRODUCTNAME_TAG = "productname";
-        ArrayList result = new ArrayList();
+        ArrayList<String> result = new ArrayList<String>();
 
         try {
             JSONObject jsonObject = new JSONObject(input);
@@ -54,14 +54,14 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return result;
     }
 
-    public ArrayList getRMData(String input) { //php에서 토큰 분리
+    public ArrayList<String> getRMData(String input) { //php에서 토큰 분리
 
         String JSON_TAG = "webnautes";
         String TAG_a = "recipecode";
         String TAG_b = "meterialname";
         String TAG_c = "meterialcapacity";
         String TAG_d = "meterialtype";
-        ArrayList result = new ArrayList();
+        ArrayList<String> result = new ArrayList<String>();
 
         try {
             JSONObject jsonObject = new JSONObject(input);
@@ -73,6 +73,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 result.add(item.getString(TAG_b));
                 result.add(item.getString(TAG_c));
                 result.add(item.getString(TAG_d));
+                System.out.println(item.getString(TAG_a)); //test
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -81,7 +82,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return result;
     }
 
-    public ArrayList getRBData(String input) { //php에서 토큰 분리
+    public ArrayList<String> getRBData(String input) { //php에서 토큰 분리
 
         String JSON_TAG = "webnautes";
         String TAG_a ="recipecode";
@@ -91,7 +92,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         String TAG_e ="foodcategory";
         String TAG_f ="cookingtime";
         String TAG_g ="inageurl";
-        ArrayList result = new ArrayList();
+        ArrayList<String> result = new ArrayList<String>();
 
         try {
             JSONObject jsonObject = new JSONObject(input);
@@ -106,6 +107,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 result.add(item.getString(TAG_e));
                 result.add(item.getString(TAG_f));
                 result.add(item.getString(TAG_g));
+                System.out.println(item.getString(TAG_a)); //test
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -114,7 +116,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return result;
     }
 
-    public ArrayList getRPData(String input) { //php에서 토큰 분리
+    public ArrayList<String> getRPData(String input) { //php에서 토큰 분리
 
         String JSON_TAG = "webnautes";
         String TAG_a ="recipecode";
@@ -122,7 +124,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         String TAG_c ="cookingprocess";
         String TAG_d ="processimageurl";
 
-        ArrayList result = new ArrayList();
+        ArrayList<String> result = new ArrayList<String>();
 
         try {
             JSONObject jsonObject = new JSONObject(input);
@@ -134,6 +136,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 result.add(item.getString(TAG_b));
                 result.add(item.getString(TAG_c));
                 result.add(item.getString(TAG_d));
+                System.out.println(item.getString(TAG_a)); //test
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -142,7 +145,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return result;
     }
 
-    public boolean addBCtuples(ArrayList input, RoomDBClasses.Barcode_Database db) { //데이터베이스에 튜플 삽입
+    public boolean addBCtuples(ArrayList<String> input, RoomDBClasses.Barcode_Database db) { //데이터베이스에 튜플 삽입
         String barcode ="";
         String pn ="";
         try {
@@ -165,7 +168,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return true;
     }
 
-    public boolean addRBtuples(ArrayList input, RoomDBClasses.RecipeBasic_Database db) { //데이터베이스에 튜플 삽입
+    public boolean addRBtuples(ArrayList<String> input, RoomDBClasses.RecipeBasic_Database db) { //데이터베이스에 튜플 삽입
         String TAG_a ="";
         String TAG_b ="";
         String TAG_c ="";
@@ -217,7 +220,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return true;
     }
 
-    public boolean addRPtuples(ArrayList input, RoomDBClasses.RecipeProcess_Database db) { //데이터베이스에 튜플 삽입
+    public boolean addRPtuples(ArrayList<String> input, RoomDBClasses.RecipeProcess_Database db) { //데이터베이스에 튜플 삽입
         String TAG_a ="";
         String TAG_b ="";
         String TAG_c ="";
@@ -255,7 +258,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         return true;
     }
 
-    public boolean addRMtuples(ArrayList input, RoomDBClasses.RecipeMaterial_Database db) { //데이터베이스에 튜플 삽입
+    public boolean addRMtuples(ArrayList<String> input, RoomDBClasses.RecipeMaterial_Database db) { //데이터베이스에 튜플 삽입
         String TAG_a ="";
         String TAG_b ="";
         String TAG_c ="";
