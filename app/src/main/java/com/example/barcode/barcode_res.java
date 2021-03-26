@@ -32,8 +32,8 @@ public class barcode_res extends AppCompatActivity {
         Intent intent = getIntent();
         String data = intent.getStringExtra("바코드값");
 
-        String result_pp = DatabaseBuilder.db.daoBarcode().search_barcode_ProductName(data); //바코드번호
-        String result_pd = DatabaseBuilder.db.daoBarcode().search_barcode(data); //상품명
+        String result_pp = DatabaseBuilder.Barcode_DB.DaoBC().search_barcode_ProductName(data); //바코드번호
+        String result_pd = DatabaseBuilder.Barcode_DB.DaoBC().search_barcode(data); //상품명
 
         String result = "상품명:\t"+result_pd +"\n\r"+ "카테고리:\t"+result_pp;
 

@@ -153,7 +153,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                     pn = (String) input.get(i);
                 }
                 if (barcode != "" && pn != "") {
-                    db.daoBarcode().Insert(barcode, pn);
+                    db.DaoBC().Insert(barcode, pn);
                     barcode = ""; pn ="";
                 }
             }
@@ -199,7 +199,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 }
 
                 if (TAG_a !="" && TAG_b !="" &&TAG_c !="" &&TAG_d !="" &&TAG_e !="" &&TAG_f !="" && TAG_g !="") {
-                    db.daoBarcode().InsertRB(TAG_a, TAG_b, TAG_c, TAG_d, TAG_e, TAG_f, TAG_g);
+                    db.DaoRB().InsertRB(TAG_a, TAG_b, TAG_c, TAG_d, TAG_e, TAG_f, TAG_g);
                     TAG_a ="";
                     TAG_b ="";
                     TAG_c ="";
@@ -240,7 +240,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 }
 
                 if (TAG_a !="" && TAG_b !="" &&TAG_c !="" &&TAG_d !="") {
-                    db.daoBarcode().InsertRP(TAG_a, TAG_b, TAG_c, TAG_d);
+                    db.DaoRP().InsertRP(TAG_a, TAG_b, TAG_c, TAG_d);
                     TAG_a ="";
                     TAG_b ="";
                     TAG_c ="";
@@ -278,7 +278,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 }
 
                 if (TAG_a !="" && TAG_b !="" &&TAG_c !="" &&TAG_d !="") {
-                    db.daoBarcode().InsertRM(TAG_a, TAG_b, TAG_c, TAG_d);
+                    db.DaoRM().InsertRM(TAG_a, TAG_b, TAG_c, TAG_d);
                     TAG_a ="";
                     TAG_b ="";
                     TAG_c ="";

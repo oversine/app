@@ -6,12 +6,12 @@ import androidx.room.PrimaryKey;
 
 public class DbClasses {
 
-    @Entity
+    @Entity(tableName = "Barcode")
     public class Barcode{
         @PrimaryKey
         @NonNull
-        private String barcode;
-        private String productname;
+        public String barcode;
+        public String productname;
 
         public String getProductname() { return productname; }
 
@@ -43,13 +43,13 @@ public class DbClasses {
         }
     }
 
-    @Entity
+    @Entity(tableName = "RecipeBasic")
     public class RecipeBasic{
         @PrimaryKey
         @NonNull
-        private String recipecode;
+        public String recipecode;
         @NonNull
-        private String recipename, simpleinfo, typecategory, foodcategory, cookingtime, imageurl ;
+        public String recipename, simpleinfo, typecategory, foodcategory, cookingtime, imageurl ;
 
         @NonNull
         public String getRecipecode() {
@@ -128,12 +128,11 @@ public class DbClasses {
         }
     }
 
-    @Entity(primaryKeys = {"recipecode", "meterialname", "meterialcapacity"})
+    @Entity(tableName = "RecipeMaterial", primaryKeys = {"recipecode", "meterialname", "meterialcapacity"})
     public class RecipeMaterial{
-        @PrimaryKey
         @NonNull
-        private String recipecode, meterialname, meterialcapacity;
-        private String meterialtype;
+        public String recipecode, meterialname, meterialcapacity;
+        public String meterialtype;
 
         @Override
         public String toString() {
@@ -182,13 +181,12 @@ public class DbClasses {
         }
     }
 
-    @Entity(primaryKeys  = {"recipecode", "outputsequence"})
+    @Entity(tableName = "RecipeProcess", primaryKeys  = {"recipecode", "outputsequence"})
     public class RecipeProcess{
-        @PrimaryKey
         @NonNull
-        private String recipecode, outputsequence;
-
-        private String cookingprocess, processimageurl;
+        public String recipecode;
+        @NonNull public String outputsequence;
+        public String cookingprocess, processimageurl;
 
         @Override
         public String toString() {
