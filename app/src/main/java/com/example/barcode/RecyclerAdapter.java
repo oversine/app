@@ -16,11 +16,8 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
 
-    private List<TableList> listdata;
+    private ArrayList<SavePd> listdata = new ArrayList<>();
 
-    public RecyclerAdapter(List<TableList> listdata) {
-        this.listdata = listdata;
-    }
 
     @NonNull
     @Override
@@ -37,21 +34,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
-        TableList tableList = listdata.get(i);
-        itemViewHolder.ProductName.setText(tableList.getProductName());
-        itemViewHolder.ProductCategory.setText(tableList.getProductCategory());
-        itemViewHolder.ProductData.setText(tableList.getProductData());
+        SavePd savePd = listdata.get(i);
+        itemViewHolder.ProductName.setText(savePd.getPdName());
+        itemViewHolder.ProductCategory.setText(savePd.getPdCategory());
+        itemViewHolder.ProductData.setText(savePd.getPdData());
         itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
     }
 
-    void addItem(TableList tableList){
-        listdata.add(tableList);
-    }
 
+    void addData(SavePd savePd) {
+        listdata.add(savePd);
+        notifyDataSetChanged();
+    }
 
     void removeItem(int position){
         listdata.remove(position);
     }
+
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -62,7 +61,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
 
         public ItemViewHolder(@NonNull View itemView){
             super(itemView);
-
             ProductName = itemView.findViewById(R.id.PdName);
             ProductCategory = itemView.findViewById(R.id.PdCategory);
             ProductData = itemView.findViewById(R.id.PdData);

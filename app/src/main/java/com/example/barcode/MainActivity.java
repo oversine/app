@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.Theme_Barcode);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // 밤에 실행시 다크 모드 관련 실행직후 검은화면 뜨는 문제 해결 필요
         ////////////////////////////////////// 앱 시작시 php서버에 접속하여 db를 불러와 room에 저장
         builder = new DatabaseBuilder(this); //DB초기화
         sqlConnect = new SqlConnect();               //객체생성

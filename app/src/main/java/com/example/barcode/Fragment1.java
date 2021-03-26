@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,24 +27,22 @@ public class Fragment1 extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
-    private Database dbHelper;
-
-    List<TableList> table;
+    private List<SavePd> table;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_frige, container, false);
 
-        dbHelper = new Database(getActivity());
-        table = new ArrayList<>();
-        table = dbHelper.selectAll();
-
         recyclerView = view.findViewById(R.id.recyclerView1);
 
-        adapter = new RecyclerAdapter(table);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
 
+        table = Product_Database.getInstance(getActivity()).daoSave().getAll();
+        int size = table.size();
+        for(int i = 0; i < size; i++){
+            adapter.addData(table.get(i));
+        }
         return view;
     }
-
 }

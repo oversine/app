@@ -13,21 +13,21 @@ import androidx.room.Room;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class barcode_res extends AppCompatActivity {
 
-    Button save;
-    Button addProduct;
+    Button save, addProduct;
     TextView textView1, textView6, tv;
-    RecyclerAdapter adapter;
-
-    List<TableList> table;
+    private Product_Database pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_res);
+
+        pd = Product_Database.getInstance(this);
+
 
         Intent intent = getIntent();
         String data = intent.getStringExtra("바코드값");
@@ -65,10 +65,8 @@ public class barcode_res extends AppCompatActivity {
             save.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Database db = new Database(barcode_res.this);
-                    db.addPN(textView1.getText().toString().trim(), textView6.getText().toString().trim(), tv.getText().toString().trim());
-                    adapter = new RecyclerAdapter(table);
-                    adapter.notifyDataSetChanged();
+                    Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
+                    pd.daoSave().insert(new SavePd(textView1.getText().toString(), textView6.getText().toString(), tv.getText().toString()));
                     finish();
                 }
             });
@@ -77,19 +75,15 @@ public class barcode_res extends AppCompatActivity {
             addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Database db = new Database(barcode_res.this);
-                db.addPN(textView1.getText().toString().trim(), textView6.getText().toString().trim(), tv.getText().toString().trim());
-                adapter = new RecyclerAdapter(table);
-                adapter.notifyDataSetChanged();
+                Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
+                pd.daoSave().insert(new SavePd(textView1.getText().toString(), textView6.getText().toString(), tv.getText().toString()));
                 Intent intent = new Intent(v.getContext(), scan.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        }
-
-
+    }
         DatePickerDialog.OnDateSetListener mDateSetListener =
                 new DatePickerDialog.OnDateSetListener() {
                     @Override

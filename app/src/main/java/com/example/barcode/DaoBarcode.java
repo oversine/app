@@ -22,5 +22,4 @@ public interface DaoBarcode {
 
     // @Delete
     // void nukeTable(Barcode... barcode);//튜플삭제
-
 }
