@@ -44,7 +44,7 @@ public class DbClasses {
     }
 
     @Entity(tableName = "RecipeBasic")
-    public static class RecipeBasic{
+    public class RecipeBasic{
         @PrimaryKey
         @NonNull
         public String recipecode;

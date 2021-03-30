@@ -1,6 +1,7 @@
 package com.example.barcode;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
-                        DbClasses.RecipeBasic item = listRecipe.get(pos);
+                        Intent intent = new Intent(v.getContext(), Recipe_result.class);
+                        String code = listRecipe.get(pos).getRecipecode();
+                        intent.putExtra("레시피코드", code);
+                        v.getContext().startActivity(intent);
                     }
                 }
             });
