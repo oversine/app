@@ -269,7 +269,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 if(i%4 == 0){
                     TAG_a = (String) input.get(i);
                 }
-                else if (i%74== 1){
+                else if (i%4== 1){
                     TAG_b = (String) input.get(i);
                 }
                 else if(i%4 == 2){
