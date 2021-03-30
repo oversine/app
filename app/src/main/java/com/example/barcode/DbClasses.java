@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 public class DbClasses {
 
-    @Entity(tableName = "Barcode")
+    @Entity
     public class Barcode{
         @PrimaryKey
         @NonNull
@@ -43,7 +43,7 @@ public class DbClasses {
         }
     }
 
-    @Entity(tableName = "RecipeBasic")
+    @Entity
     public class RecipeBasic{
         @PrimaryKey
         @NonNull
@@ -128,7 +128,7 @@ public class DbClasses {
         }
     }
 
-    @Entity(tableName = "RecipeMaterial", primaryKeys = {"recipecode", "meterialname", "meterialcapacity"})
+    @Entity(primaryKeys = {"recipecode", "meterialname", "meterialcapacity"})
     public class RecipeMaterial{
         @NonNull
         public String recipecode, meterialname, meterialcapacity;
@@ -181,7 +181,7 @@ public class DbClasses {
         }
     }
 
-    @Entity(tableName = "RecipeProcess", primaryKeys  = {"recipecode", "outputsequence", "cookingprocess"})
+    @Entity(primaryKeys  = {"recipecode", "outputsequence", "cookingprocess"})
     public class RecipeProcess{
         @NonNull
         public String recipecode, outputsequence, cookingprocess;

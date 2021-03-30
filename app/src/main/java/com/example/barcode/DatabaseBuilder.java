@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class DatabaseBuilder { // 데이터베이스 빌더
 
-    //public static Barcode_Database db;
     public static RoomDBClasses.Barcode_Database Barcode_DB;
     public static RoomDBClasses.RecipeBasic_Database RecipeB_DB;
     public static RoomDBClasses.RecipeMaterial_Database RecipeM_DB;
@@ -23,9 +22,9 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         System.out.println("createBCDb Success");
         RecipeB_DB = Room.databaseBuilder(context, RoomDBClasses.RecipeBasic_Database.class, "RecipeBasic_1.0.0.db").allowMainThreadQueries().addMigrations().build();
         System.out.println("createRBDb Success");
-        RecipeM_DB = Room.databaseBuilder(context, RoomDBClasses.RecipeMaterial_Database.class, "RecipeBasic_1.0.0.db").allowMainThreadQueries().addMigrations().build();
+        RecipeM_DB = Room.databaseBuilder(context, RoomDBClasses.RecipeMaterial_Database.class, "RecipeMaterial_1.0.0.db").allowMainThreadQueries().addMigrations().build();
         System.out.println("createRMDb Success");
-        RecipeP_DB = Room.databaseBuilder(context, RoomDBClasses.RecipeProcess_Database.class, "RecipeBasic_1.0.0.db").allowMainThreadQueries().addMigrations().build();
+        RecipeP_DB = Room.databaseBuilder(context, RoomDBClasses.RecipeProcess_Database.class, "RecipeProcess_1.0.0.db").allowMainThreadQueries().addMigrations().build();
         System.out.println("createRPDb Success");
     }
 
@@ -58,9 +57,9 @@ public class DatabaseBuilder { // 데이터베이스 빌더
 
         String JSON_TAG = "webnautes";
         String TAG_a = "recipecode";
-        String TAG_b = "meterialname";
-        String TAG_c = "meterialcapacity";
-        String TAG_d = "meterialtype";
+        String TAG_b = "materialname";
+        String TAG_c = "materialcapacity";
+        String TAG_d = "materialtype";
         ArrayList<String> result = new ArrayList<String>();
 
         try {
@@ -86,12 +85,12 @@ public class DatabaseBuilder { // 데이터베이스 빌더
 
         String JSON_TAG = "webnautes";
         String TAG_a ="recipecode";
-        String TAG_b ="recupename";
+        String TAG_b ="recipename";
         String TAG_c ="simpleinfo";
         String TAG_d ="typecategory";
         String TAG_e ="foodcategory";
         String TAG_f ="cookingtime";
-        String TAG_g ="inageurl";
+        String TAG_g ="imageurl";
         ArrayList<String> result = new ArrayList<String>();
 
         try {
