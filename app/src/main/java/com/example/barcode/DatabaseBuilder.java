@@ -44,7 +44,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject item = jsonArray.getJSONObject(i);
                 result.add(item.getString(BARCODE_TAG));
-                System.out.println(item.getString(BARCODE_TAG)); //test
+                //System.out.println(item.getString(BARCODE_TAG)); //test
                 result.add(item.getString(PRODUCTNAME_TAG));
             }
         } catch (Exception e) {
@@ -73,12 +73,12 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 result.add(item.getString(TAG_b));
                 result.add(item.getString(TAG_c));
                 result.add(item.getString(TAG_d));
-                System.out.println(item.getString(TAG_a)); //test
+                //System.out.println(item.getString(TAG_a)); //test
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("tokenizing success");
+        System.out.println("RM tokenizing success");
         return result;
     }
 
@@ -107,12 +107,12 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 result.add(item.getString(TAG_e));
                 result.add(item.getString(TAG_f));
                 result.add(item.getString(TAG_g));
-                System.out.println(item.getString(TAG_a)); //test
+                //System.out.println(item.getString(TAG_a)); //test
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("tokenizing success");
+        System.out.println("RB tokenizing success");
         return result;
     }
 
@@ -136,12 +136,12 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 result.add(item.getString(TAG_b));
                 result.add(item.getString(TAG_c));
                 result.add(item.getString(TAG_d));
-                System.out.println(item.getString(TAG_a)); //test
+                //System.out.println(item.getString(TAG_a)); //test
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("tokenizing success");
+        System.out.println("RP tokenizing success");
         return result;
     }
 
@@ -164,7 +164,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
             System.out.println(e.getMessage());
             return false;
         }
-        System.out.println("adding tuples success");
+        System.out.println("adding BC tuples success");
         return true;
     }
 
@@ -216,7 +216,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
             System.out.println(e.getMessage());
             return false;
         }
-        System.out.println("adding RBtuples success");
+        System.out.println("adding RB tuples success");
         return true;
     }
 
@@ -232,7 +232,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 if(i%4 == 0){
                     TAG_a = (String) input.get(i);
                 }
-                else if (i%74== 1){
+                else if (i%4== 1){
                     TAG_b = (String) input.get(i);
                 }
                 else if(i%4 == 2){
@@ -254,7 +254,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
             System.out.println(e.getMessage());
             return false;
         }
-        System.out.println("adding tuples success");
+        System.out.println("adding RP tuples success");
         return true;
     }
 
@@ -292,7 +292,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
             System.out.println(e.getMessage());
             return false;
         }
-        System.out.println("adding tuples success");
+        System.out.println("adding RM tuples success");
         return true;
     }
 

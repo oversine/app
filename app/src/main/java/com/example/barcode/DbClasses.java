@@ -181,12 +181,11 @@ public class DbClasses {
         }
     }
 
-    @Entity(tableName = "RecipeProcess", primaryKeys  = {"recipecode", "outputsequence"})
+    @Entity(tableName = "RecipeProcess", primaryKeys  = {"recipecode", "outputsequence", "cookingprocess"})
     public class RecipeProcess{
         @NonNull
-        public String recipecode;
-        @NonNull public String outputsequence;
-        public String cookingprocess, processimageurl;
+        public String recipecode, outputsequence, cookingprocess;
+        public String processimageurl;
 
         @Override
         public String toString() {
