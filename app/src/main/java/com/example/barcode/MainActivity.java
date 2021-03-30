@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new Fragment3();
             }
 
-            fragmentTransaction.add(R.id.frameLayout, fragment, tag);
+            fragmentTransaction.replace(R.id.frameLayout, fragment, tag);
         } else {
             fragmentTransaction.show(fragment);
         }

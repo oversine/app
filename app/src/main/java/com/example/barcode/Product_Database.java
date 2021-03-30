@@ -8,7 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
-@Database(entities = {SavePd.class}, version = 1)
+@Database(entities = {SavePd.class}, version = 1, exportSchema = false)
 public abstract class Product_Database extends RoomDatabase {
     public abstract DaoSave daoSave();
     private static  Product_Database instance = null;
