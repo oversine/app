@@ -16,4 +16,16 @@ public interface DaoRB {
     @Query("SELECT recipename FROM RecipeBasic WHERE recipecode = :input")//바코드로 상품명 검색
     String search_RecipeName(String input);
 
+    @Query("SELECT recipename FROM RecipeBasic")
+    String search_RecipeName();
+
+    @Query("SELECT recipecode FROM RecipeBasic")
+    String search_RecipeCode();
+
+    @Query("SELECT typecategory FROM RecipeBasic")
+    String search_typecategory();
+
+    @Query("SELECT * FROM RecipeBasic")
+    String getAll();
+
 }

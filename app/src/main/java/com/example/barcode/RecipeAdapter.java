@@ -38,9 +38,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
         DbClasses.RecipeBasic recipeBasic = listRecipe.get(i);
-        itemViewHolder.RecipeName.setText(recipeBasic.getRecipename());
-        itemViewHolder.RecipeCode.setText(recipeBasic.getRecipecode());
-        itemViewHolder.RecipeCategory.setText(recipeBasic.getTypecategory());
+        itemViewHolder.RecipeName.setText(DatabaseBuilder.RecipeB_DB.DaoRB().search_RecipeName()); //////////////////////////////////////////////
+        itemViewHolder.RecipeCode.setText(DatabaseBuilder.RecipeB_DB.DaoRB().search_RecipeCode()); //////////////////////////////////////////////
+        itemViewHolder.RecipeCategory.setText(DatabaseBuilder.RecipeB_DB.DaoRB().search_typecategory()); //////////////////////////////////////////////
         itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
     }
 
