@@ -13,11 +13,23 @@ public interface DaoRB {
     @Query("SELECT * FROM RecipeBasic")
     List<DbClasses.RecipeBasic> getRecipe();
 
-    @Query("SELECT recipename FROM RecipeBasic WHERE recipecode = :input")//코드로 레시피명 검색
+    @Query("SELECT recipename FROM RecipeBasic WHERE recipecode = :input")//바코드로 상품명 검색
     String search_RecipeName(String input);
 
     @Query("SELECT imageurl FROM RecipeBasic WHERE recipecode = :input")//코드로 레시피 이미지 검색
     String search_RecipeImg(String input);
 
+
+    @Query("SELECT recipename FROM RecipeBasic")
+    String search_RecipeName();
+
+    @Query("SELECT recipecode FROM RecipeBasic")
+    String search_RecipeCode();
+
+    @Query("SELECT typecategory FROM RecipeBasic")
+    String search_typecategory();
+
+    @Query("SELECT * FROM RecipeBasic")
+    String getAll();
 
 }
