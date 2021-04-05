@@ -1,6 +1,7 @@
 package com.example.barcode;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -44,7 +45,7 @@ public class DbClasses {
     }
 
     @Entity(tableName = "RecipeBasic")
-    public class RecipeBasic{
+    public static class RecipeBasic{
         @PrimaryKey
         @NonNull
         public String recipecode;
@@ -129,19 +130,15 @@ public class DbClasses {
     }
 
     @Entity(tableName = "RecipeMaterial", primaryKeys = {"recipecode", "meterialname", "meterialcapacity"})
-    public class RecipeMaterial{
+    public static class RecipeMaterial{
         @NonNull
         public String recipecode, meterialname, meterialcapacity;
         public String meterialtype;
 
         @Override
         public String toString() {
-            return "RecipeMaterial{" +
-                    "recipecode='" + recipecode + '\'' +
-                    ", meterialname='" + meterialname + '\'' +
-                    ", meterialcapacity='" + meterialcapacity + '\'' +
-                    ", meterialtype='" + meterialtype + '\'' +
-                    '}';
+            return String.format("재료 : " + meterialname + "\r\r\r" + "양 : " + meterialcapacity + "\n");
+
         }
 
         public void setRecipecode(@NonNull String recipecode) {
@@ -182,7 +179,7 @@ public class DbClasses {
     }
 
     @Entity(tableName = "RecipeProcess", primaryKeys  = {"recipecode", "outputsequence", "cookingprocess"})
-    public class RecipeProcess{
+    public static class RecipeProcess{
         @NonNull
         public String recipecode, outputsequence, cookingprocess;
         public String processimageurl;

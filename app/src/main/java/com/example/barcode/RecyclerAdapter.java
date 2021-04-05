@@ -1,6 +1,7 @@
 package com.example.barcode;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,8 +51,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
 
     void removeItem(int position){
         listdata.remove(position);
+        notifyItemRemoved(position);
+        notifyItemChanged(position, listdata.size());
     }
-
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -59,6 +61,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         private TextView ProductCategory;
         private TextView ProductData;
         private ImageView img;
+        private ImageView Item_delete;
 
         public ItemViewHolder(@NonNull View itemView){
             super(itemView);
@@ -66,6 +69,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
             ProductCategory = itemView.findViewById(R.id.PdCategory);
             ProductData = itemView.findViewById(R.id.PdData);
             img = itemView.findViewById(R.id.imageView);
+            Item_delete = itemView.findViewById(R.id.PdDelete);
+
+            Item_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    SavePd savePd = listdata.get(pos);
+
+                    if (pos != RecyclerView.NO_POSITION) {
+                        removeItem(pos);
+                        Product_Database.getInstance(Item_delete.getContext()).daoSave().delete(savePd);
+                    }
+                }
+            });
         }
     }
 }

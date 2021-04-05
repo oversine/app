@@ -20,7 +20,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
     public DatabaseBuilder(Context context) {
         Barcode_DB = Room.databaseBuilder(context, RoomDBClasses.Barcode_Database.class, "Barcode_1.0.0.db").allowMainThreadQueries().addMigrations().build();
         System.out.println("createBCDb Success");
-        RecipeB_DB = Room.databaseBuilder(context, RoomDBClasses.RecipeBasic_Database.class, "RecipeBasic_1.0.0.db").allowMainThreadQueries().addMigrations().build();
+        RecipeB_DB = Room.databaseBuilder(context.getApplicationContext(), RoomDBClasses.RecipeBasic_Database.class, "RecipeBasic_1.0.0.db").allowMainThreadQueries().addMigrations().build();
         System.out.println("createRBDb Success");
         RecipeM_DB = Room.databaseBuilder(context, RoomDBClasses.RecipeMaterial_Database.class, "RecipeMaterial_1.0.0.db").allowMainThreadQueries().addMigrations().build();
         System.out.println("createRMDb Success");

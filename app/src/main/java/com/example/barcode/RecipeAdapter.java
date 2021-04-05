@@ -7,18 +7,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHolder>{
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHolder> implements Filterable {
 
-    private ArrayList<DbClasses.RecipeBasic> listRecipe = new ArrayList<>();
+    private List<DbClasses.RecipeBasic> listRecipe;
+    private List<DbClasses.RecipeBasic> unlistRecipe;
+
+    public RecipeAdapter (List<DbClasses.RecipeBasic> list) {
+        this.unlistRecipe = list;
+        this.listRecipe = list;
+    }
 
 
     @NonNull
@@ -39,9 +49,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
         DbClasses.RecipeBasic recipeBasic = listRecipe.get(i);
         itemViewHolder.RecipeName.setText(recipeBasic.getRecipename());
-        itemViewHolder.RecipeCode.setText(recipeBasic.getRecipecode());
-        itemViewHolder.RecipeCategory.setText(recipeBasic.getTypecategory());
-        itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
+        itemViewHolder.RecipeCategory.setText(recipeBasic.getFoodcategory());
+        Glide.with(itemViewHolder.itemView.getContext()).load(recipeBasic.getImageurl()).into(itemViewHolder.img);
     }
 
 
@@ -50,24 +59,19 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
         notifyDataSetChanged();
     }
 
-    void removeItem(int position){
-        listRecipe.remove(position);
-    }
 
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView RecipeName;
-        private TextView RecipeCode;
         private TextView RecipeCategory;
         private ImageView img;
 
         public ItemViewHolder(@NonNull View itemView){
             super(itemView);
             RecipeName = itemView.findViewById(R.id.RcName);
-            RecipeCode = itemView.findViewById(R.id.RcCode);
             RecipeCategory = itemView.findViewById(R.id.RcCategory);
-            img = itemView.findViewById(R.id.imageView);
+            img = itemView.findViewById(R.id.imageRecipe);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,5 +86,38 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                 }
             });
         }
+        }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
     }
-}
+
+    private Filter exampleFilter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                ArrayList<DbClasses.RecipeBasic> filterdeList = new ArrayList<>();
+
+                if (constraint == null || constraint.length() == 0 ) {
+                    listRecipe = unlistRecipe;
+                } else {
+                    String filterPattern = constraint.toString().toLowerCase().trim();
+                    for (DbClasses.RecipeBasic recipeBasic : unlistRecipe) {
+                        if (recipeBasic.getRecipename().toLowerCase().contains(filterPattern)) {
+                            filterdeList.add(recipeBasic);
+                        }
+                    }
+                    listRecipe = filterdeList;
+                }
+                FilterResults results = new FilterResults();
+                results.values = listRecipe;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                listRecipe = (ArrayList<DbClasses.RecipeBasic>)results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }

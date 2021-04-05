@@ -37,6 +37,7 @@
         <activity android:name=".barcode_res" />
         <activity android:name=".scan" />
         <activity android:name=".SetActivity" />
+        <activity android:name=".Recipe_result" />
         <activity android:name=".MainActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>

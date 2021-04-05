@@ -11,9 +11,10 @@
 
     <ImageView
         android:id="@+id/imageRecipe"
+        android:scaleType="center"
+        android:contentDescription="@string/StringValue"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@color/black"/>
+        android:layout_height="50dp" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -42,15 +43,5 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="13sp" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/RcCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:includeFontPadding="false"
-        android:text="test"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        android:textStyle="bold" />
 
 </LinearLayout>
