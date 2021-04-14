@@ -17,6 +17,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -35,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // 밤에 실행시 다크 모드 관련 실행직후 검은화면 뜨는 문제 해결 필요
         ////////////////////////////////////// 앱 시작시 php서버에 접속하여 db를 불러와 room에 저장
-        //builder = new DatabaseBuilder(this); //DB초기화
+
+        builder = new DatabaseBuilder(this); //DB초기화
         sqlConnect = new SqlConnect();               //객체생성
 
         SqlConnect.Get_Barcode_php task = new SqlConnect.Get_Barcode_php();
@@ -54,7 +58,17 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        ////////////////python execution part(embedding)_test_ver
+        //src/main/python/myscript.py를 수정할 것
+        if (! Python.isStarted()) {
+            Python.start(new AndroidPlatform(this));
+        }
+        Python py = Python.getInstance();
+        PyObject pyobj = py.getModule("myscript");//file name
 
+        PyObject obj = pyobj.callAttr("main");//function name
+        System.out.println(obj.toString());
+        ///////////////
         //////////////////////////////////////
         mBottomNV = findViewById(R.id.navigation);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte

@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
+    id 'com.chaquo.python'
 }
+apply plugin: 'com.android.application'
+apply plugin: 'com.chaquo.python'
 
 android {
     compileSdkVersion 30
@@ -12,6 +15,19 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+        python {
+            buildPython "D:/Program Files (x86)/Microsoft Visual Studio/Shared/Python37_64/python.exe"//python loaction
+            buildPython "C:/path/to/py.exe", "-3.8"//
+        }
+        sourceSets {
+            main {
+                python.srcDir "src/main/python"//python script loacation
+            }
+        }
+
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -57,7 +73,7 @@ dependencies {
 
     implementation 'com.android.support:design:30.0.0' // bottomNavigationView
 
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
 
     implementation 'androidx.preference:preference:1.1.1'
 
