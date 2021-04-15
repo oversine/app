@@ -2,23 +2,24 @@ package com.example.barcode;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.ListPreference;
 
-public class SetPreferenceFragment extends PreferenceFragment {
+public class SetPreferenceFragment extends PreferenceFragmentCompat {
     SharedPreferences prefs;
-
     ListPreference dataPreference;
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        addPreferencesFromResource(R.xml.settings_preference);
+        dataPreference = (ListPreference)findPreference("userData_list");
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        addPreferencesFromResource(R.xml.settings_preference);
-        dataPreference = (ListPreference)findPreference("userData_list");
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 

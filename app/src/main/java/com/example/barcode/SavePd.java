@@ -4,19 +4,23 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity
 public class SavePd {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String PdName;
-    private String PdCategory;
-    private String PdData;
+    private String PdName; // 상품명
+    private String PdDate; // 유통기한 날짜
+    private String PdImg;
+    private Date MainDate; // 유통기한 날짜 Date 타입
 
-    public SavePd(String PdName, String PdCategory, String PdData) {
+    public SavePd(String PdName, String PdDate, String PdImg, Date MainDate) {
         this.PdName = PdName;
-        this.PdCategory = PdCategory;
-        this.PdData = PdData;
+        this.PdDate = PdDate;
+        this.PdImg = PdImg;
+        this.MainDate = MainDate;
     }
 
     public int getId() {
@@ -35,20 +39,28 @@ public class SavePd {
         PdName = pdName;
     }
 
-    public String getPdCategory() {
-        return PdCategory;
+    public String getPdDate() {
+        return PdDate;
     }
 
-    public void setPdCategory(String pdCategory) {
-        PdCategory = pdCategory;
+    public void setPdDate(String pdDate) {
+        PdDate = pdDate;
     }
 
-    public String getPdData() {
-        return PdData;
+    public String getPdImg() {
+        return PdImg;
     }
 
-    public void setPdData(String pdData) {
-        PdData = pdData;
+    public void setPdImg(String pdImg) {
+        PdImg = pdImg;
+    }
+
+    public Date getMainDate() {
+        return MainDate;
+    }
+
+    public void setMainDate(Date mainDate) {
+        MainDate = mainDate;
     }
 }
 

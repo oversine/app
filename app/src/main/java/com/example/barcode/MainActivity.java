@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -74,13 +76,18 @@ public class MainActivity extends AppCompatActivity {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        if (item.getItemId() == R.id.action_menu1){
-                            Toast.makeText(MainActivity.this, "메뉴 1", Toast.LENGTH_SHORT).show();
-                        }else if(item.getItemId() == R.id.action_menu2){
-                            Intent intent = new Intent(MainActivity.this, SetActivity.class);
-                            startActivity(intent);
-                            return true;
-                        }
+                            if (item.getItemId() == R.id.action_menu1){
+                                Intent intent = new Intent(MainActivity.this, Manual_Res.class);
+                                startActivity(intent);
+                                return true;
+                            }else if(item.getItemId() == R.id.action_menu2){
+                                Intent intent1 = new Intent(MainActivity.this, Bookmarks.class);
+                                startActivity(intent1);
+                                return true;
+                            }else {
+                                Intent intent2 = new Intent(MainActivity.this, SetActivity.class);
+                                startActivity(intent2);
+                            }
                         return false;
                     }
                 });

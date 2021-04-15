@@ -19,17 +19,4 @@ public interface DaoRB {
     @Query("SELECT imageurl FROM RecipeBasic WHERE recipecode = :input")//코드로 레시피 이미지 검색
     String search_RecipeImg(String input);
 
-
-    @Query("SELECT recipename FROM RecipeBasic")
-    String search_RecipeName();
-
-    @Query("SELECT recipecode FROM RecipeBasic")
-    String search_RecipeCode();
-
-    @Query("SELECT typecategory FROM RecipeBasic")
-    String search_typecategory();
-
-    @Query("SELECT * FROM RecipeBasic")
-    String getAll();
-
 }

@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Fragment1 extends Fragment {
@@ -39,6 +41,7 @@ public class Fragment1 extends Fragment {
         adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), 1));
+
 
         table = Product_Database.getInstance(getActivity()).daoSave().getAll();
         int size = table.size();

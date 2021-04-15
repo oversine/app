@@ -24,6 +24,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
 
     private List<DbClasses.RecipeBasic> listRecipe;
     private List<DbClasses.RecipeBasic> unlistRecipe;
+    private ArrayList<DbClasses.RecipeBasic> RecipeBookMark = new ArrayList<>();
 
     public RecipeAdapter (List<DbClasses.RecipeBasic> list) {
         this.unlistRecipe = list;
@@ -60,18 +61,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
     }
 
 
-
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView RecipeName;
         private TextView RecipeCategory;
-        private ImageView img;
+        private ImageView img, BookMarkImg;
 
         public ItemViewHolder(@NonNull View itemView){
             super(itemView);
             RecipeName = itemView.findViewById(R.id.RcName);
             RecipeCategory = itemView.findViewById(R.id.RcCategory);
             img = itemView.findViewById(R.id.imageRecipe);
+            BookMarkImg = itemView.findViewById(R.id.BookMarkImg);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,13 +83,21 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                         String code = listRecipe.get(pos).getRecipecode();
                         intent.putExtra("레시피코드", code);
                         v.getContext().startActivity(intent);
+                        }
+                    }
+                });
+            BookMarkImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
                     }
                 }
             });
-        }
+            }
         }
 
-    @Override
+    @Override // 필터 사용 검색기능
     public Filter getFilter() {
         return exampleFilter;
     }
