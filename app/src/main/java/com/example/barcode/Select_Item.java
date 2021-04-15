@@ -10,11 +10,11 @@ import java.util.Date;
 public class Select_Item {
     @PrimaryKey
     @NonNull
-    private String Name; // 상품명
+    private String Name;
+    @NonNull
+    private String ItemImg;
 
-    private String ItemImg; // 유통기한 날짜
-
-    public Select_Item(String Name, String ItemImg) {
+    public Select_Item(@NonNull String Name, @NonNull String ItemImg) {
         this.Name = Name;
         this.ItemImg = ItemImg;
     }
