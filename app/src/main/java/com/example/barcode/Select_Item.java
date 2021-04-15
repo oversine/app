@@ -9,6 +9,7 @@ import java.util.Date;
 @Entity
 public class Select_Item {
     @PrimaryKey
+    @NonNull
     private String Name; // 상품명
 
     private String ItemImg; // 유통기한 날짜

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -65,14 +66,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
 
         private TextView RecipeName;
         private TextView RecipeCategory;
-        private ImageView img, BookMarkImg;
+        private ImageView img;
+        private CheckBox BookMarkImg;
 
         public ItemViewHolder(@NonNull View itemView){
             super(itemView);
             RecipeName = itemView.findViewById(R.id.RcName);
             RecipeCategory = itemView.findViewById(R.id.RcCategory);
             img = itemView.findViewById(R.id.imageRecipe);
-            BookMarkImg = itemView.findViewById(R.id.BookMarkImg);
+            BookMarkImg = itemView.findViewById(R.id.btn_selector);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
