@@ -29,4 +29,7 @@ public interface DaoRB {
     @Query("SELECT typecategory FROM RecipeBasic")
     String search_typecategory();
 
+    @Query("SELECT * FROM RecipeBasic")
+    String getAll();
+
 }

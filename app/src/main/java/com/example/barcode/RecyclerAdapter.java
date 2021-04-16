@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +40,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
         SavePd savePd = listdata.get(i);
         itemViewHolder.ProductName.setText(savePd.getPdName());
-        itemViewHolder.ProductCategory.setText(savePd.getPdCategory());
-        itemViewHolder.ProductData.setText(savePd.getPdData());
-        itemViewHolder.img.setBackgroundColor(Color.LTGRAY);
+        itemViewHolder.ProductDate.setText(savePd.getPdDate());
+        Glide.with(itemViewHolder.itemView.getContext()).load(savePd.getPdImg()).into(itemViewHolder.img);
     }
 
 
@@ -58,16 +59,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView ProductName;
-        private TextView ProductCategory;
-        private TextView ProductData;
+        private TextView ProductDate;
         private ImageView img;
         private ImageView Item_delete;
 
         public ItemViewHolder(@NonNull View itemView){
             super(itemView);
             ProductName = itemView.findViewById(R.id.PdName);
-            ProductCategory = itemView.findViewById(R.id.PdCategory);
-            ProductData = itemView.findViewById(R.id.PdData);
+            ProductDate = itemView.findViewById(R.id.PdDate);
             img = itemView.findViewById(R.id.imageView);
             Item_delete = itemView.findViewById(R.id.PdDelete);
 

@@ -1,0 +1,40 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "cefce48db1cfbeb0ac1a93f61372b218",
+    "entities": [
+      {
+        "tableName": "Select_Item",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Name` TEXT NOT NULL, `ItemImg` TEXT NOT NULL, PRIMARY KEY(`Name`))",
+        "fields": [
+          {
+            "fieldPath": "Name",
+            "columnName": "Name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ItemImg",
+            "columnName": "ItemImg",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "Name"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cefce48db1cfbeb0ac1a93f61372b218')"
+    ]
+  }
+}

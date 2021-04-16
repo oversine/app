@@ -5,5 +5,8 @@
         android:title="제품 수동 등록" />
     <item
         android:id="@+id/action_menu2"
+        android:title="레시피 북마크" />
+    <item
+        android:id="@+id/action_menu3"
         android:title="설정" />
 </menu>

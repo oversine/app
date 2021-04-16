@@ -8,12 +8,16 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.Date;
 import java.util.List;
 
 @Dao
 public interface DaoSave {
     @Query("SELECT * FROM SavePd")
     List<SavePd> getAll();
+
+    @Query("SELECT * FROM SavePd WHERE MainDate <= :input")
+    List<SavePd> getDate(Date input);
 
     @Insert
     void insert(SavePd savePd);

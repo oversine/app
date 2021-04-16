@@ -11,14 +11,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class barcode_res extends AppCompatActivity {
 
     Button save, addProduct;
-    TextView textView1, textView6, tv;
+    TextView textView1, tv;
+    Date date;
     private Product_Database pd;
 
     @Override
@@ -31,28 +35,16 @@ public class barcode_res extends AppCompatActivity {
 
         Intent intent = getIntent();
         String data = intent.getStringExtra("바코드값");
-
-        String result_pp = DatabaseBuilder.Barcode_DB.DaoBC().search_barcode_ProductName(data); //바코드번호
         String result_pd = DatabaseBuilder.Barcode_DB.DaoBC().search_barcode(data); //상품명
 
-        String result = "상품명:\t"+result_pd +"\n\r"+ "카테고리:\t"+result_pp;
+        String result = "상품명:\t"+result_pd +"\n\r";
 
         if(result == null){
             Toast.makeText(this, result, Toast.LENGTH_LONG).show();
         }
             else {
                 textView1 = findViewById(R.id.textView2);
-                textView6 = findViewById(R.id.textView6);
                 textView1.setText(result_pd);
-                if(result_pp.equals("8809570010141")){
-                    textView6.setText("닭가슴살");
-                }
-                else if(result_pp.equals("8801052053042")){
-                    textView6.setText("소시지");
-                }
-                else {
-                    textView6.setText(result_pp);
-                }
         }
 
             // 날짜를 출력하는 텍스트뷰에 오늘 날짜 설정.
@@ -60,13 +52,17 @@ public class barcode_res extends AppCompatActivity {
              Calendar cal = Calendar.getInstance();
              tv.setText(cal.get(Calendar.YEAR) +"-"+ (cal.get(Calendar.MONTH)+1) +"-"+ cal.get(Calendar.DATE));
 
-
             save = findViewById(R.id.save);
             save.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
-                    pd.daoSave().insert(new SavePd(textView1.getText().toString(), textView6.getText().toString(), tv.getText().toString()));
+                    String nextDate = tv.getText().toString();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+                    try {
+                        date = simpleDateFormat.parse(nextDate); // String 날짜 Date로 변환하여 DB 저장
+                    }catch (Exception e){e.printStackTrace();}
+                    pd.daoSave().insert(new SavePd(textView1.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date));
                     finish();
                 }
             });
@@ -76,7 +72,12 @@ public class barcode_res extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
-                pd.daoSave().insert(new SavePd(textView1.getText().toString(), textView6.getText().toString(), tv.getText().toString()));
+                String nextDate = tv.getText().toString();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+                try {
+                    date = simpleDateFormat.parse(nextDate);
+                }catch (Exception e){e.printStackTrace();}
+                pd.daoSave().insert(new SavePd(textView1.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date));
                 Intent intent = new Intent(v.getContext(), scan.class);
                 startActivity(intent);
                 finish();
@@ -90,7 +91,7 @@ public class barcode_res extends AppCompatActivity {
                     public void onDateSet(DatePicker datePicker, int yy, int mm, int dd) {
                         // Date Picker에서 선택한 날짜를 TextView에 설정
                         TextView tv = findViewById(R.id.date);
-                        tv.setText(String.format("%d-%d-%d", yy,mm+1,dd));
+                        tv.setText(String.format(Locale.getDefault(),"%d-%d-%d", yy,mm+1,dd));
                     }
                 };
 
