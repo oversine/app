@@ -38,10 +38,14 @@ public class Fragment3 extends Fragment {
 
         Toolbar toolbar = view.findViewById(R.id.search_toolbar);
         MainActivity activity = (MainActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
+        if (activity != null) {
+            activity.setSupportActionBar(toolbar);
+        }
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(false);
+        if(actionBar != null) {
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
 
         recyclerView = view.findViewById(R.id.recyclerView2);
 

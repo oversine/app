@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,13 +21,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHolder> implements Filterable {
 
     private List<DbClasses.RecipeBasic> listRecipe;
     private List<DbClasses.RecipeBasic> unlistRecipe;
-    private ArrayList<DbClasses.RecipeBasic> RecipeBookMark = new ArrayList<>();
 
     public RecipeAdapter (List<DbClasses.RecipeBasic> list) {
         this.unlistRecipe = list;
@@ -40,16 +45,21 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
         return new ItemViewHolder(view);
     }
 
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
 
     @Override
     public int getItemCount() {
         return listRecipe.size();
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int i) {
-        DbClasses.RecipeBasic recipeBasic = listRecipe.get(i);
+        final DbClasses.RecipeBasic recipeBasic = listRecipe.get(i);
+        itemViewHolder.BookMarkImg.setChecked(recipeBasic.getSelected());
         itemViewHolder.RecipeName.setText(recipeBasic.getRecipename());
         itemViewHolder.RecipeCategory.setText(recipeBasic.getFoodcategory());
         Glide.with(itemViewHolder.itemView.getContext()).load(recipeBasic.getImageurl()).into(itemViewHolder.img);
@@ -60,7 +70,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
         listRecipe.add(recipeBasic);
         notifyDataSetChanged();
     }
-
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -92,7 +101,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION) {
+                    DbClasses.RecipeBasic recipeBasic = listRecipe.get(pos);
+                    CheckBox checkBox = (CheckBox) v;
+
+                    if (!recipeBasic.getSelected() && checkBox.isChecked()){
+                        recipeBasic.setSelected(true);
+                        DatabaseBuilder.RecipeB_DB.DaoRB().update(recipeBasic);
+                        notifyDataSetChanged();
+                        Toast.makeText(v.getContext(),"북마크 등록이 완료되었습니다.", Toast.LENGTH_LONG).show();
+                    }else if(recipeBasic.getSelected()){
+                        recipeBasic.setSelected(false);
+                        DatabaseBuilder.RecipeB_DB.DaoRB().update(recipeBasic);
+                        Toast.makeText(v.getContext(), "북마크가 해제되었습니다.", Toast.LENGTH_LONG).show();
                     }
                 }
             });
