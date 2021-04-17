@@ -19,8 +19,13 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
         python {
-            buildPython "D:/Program Files (x86)/Microsoft Visual Studio/Shared/Python37_64/python.exe"//python loaction
-            buildPython "C:/path/to/py.exe", "-3.8"//
+            //buildPython "D:/Program Files (x86)/Microsoft Visual Studio/Shared/Python37_64/python.exe"//python loaction pc
+            buildPython "C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python37_64/python.exe"//notebook
+            pip{
+                install "numpy"
+                //install "gensim"
+                //install "sklearn"
+            }
         }
         sourceSets {
             main {
