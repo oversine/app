@@ -175,6 +175,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
         String TAG_e ="";
         String TAG_f ="";
         String TAG_g ="";
+        boolean TAG_h = false;
         try {
             for (int i = 0; i < input.size(); i++) {
 
@@ -201,7 +202,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 }
 
                 if (TAG_a !="" && TAG_b !="" &&TAG_c !="" &&TAG_d !="" &&TAG_e !="" &&TAG_f !="" && TAG_g !="") {
-                    db.DaoRB().InsertRB(TAG_a, TAG_b, TAG_c, TAG_d, TAG_e, TAG_f, TAG_g);
+                    db.DaoRB().InsertRB(TAG_a, TAG_b, TAG_c, TAG_d, TAG_e, TAG_f, TAG_g, TAG_h);
                     TAG_a ="";
                     TAG_b ="";
                     TAG_c ="";

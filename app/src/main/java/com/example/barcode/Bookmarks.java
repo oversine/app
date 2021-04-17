@@ -26,7 +26,7 @@ public class Bookmarks extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecipeAdapter rAdapter;
-    private List<DbClasses.RecipeBasic> RcTable = new ArrayList<>();
+    private List<DbClasses.RecipeBasic> BookMarkTable = new ArrayList<>();
     MenuItem mSearch;
 
 
@@ -38,15 +38,22 @@ public class Bookmarks extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.search_bookmark);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(false);
-
+        if(actionBar != null) {
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
         recyclerView = findViewById(R.id.recyclerView_bookmark);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        rAdapter = new RecipeAdapter(RcTable);
+        rAdapter = new RecipeAdapter(BookMarkTable);
         recyclerView.setAdapter(rAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, 1));
+
+        BookMarkTable = DatabaseBuilder.RecipeB_DB.DaoRB().getBookMark();
+        int size = BookMarkTable.size();
+        for(int i = 0; i < size; i++){
+            rAdapter.addRecipe(BookMarkTable.get(i));
+        }
     }
 
     @Override

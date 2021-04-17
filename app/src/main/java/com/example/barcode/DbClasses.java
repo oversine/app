@@ -52,6 +52,16 @@ public class DbClasses {
         @NonNull
         public String recipename, simpleinfo, typecategory, foodcategory, cookingtime, imageurl ;
 
+        boolean isSelected;
+
+        public boolean getSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(boolean selected) {
+            isSelected = selected;
+        }
+
         @NonNull
         public String getRecipecode() {
             return recipecode;
