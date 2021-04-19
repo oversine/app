@@ -20,11 +20,10 @@ android {
         }
         python {
             //buildPython "D:/Program Files (x86)/Microsoft Visual Studio/Shared/Python37_64/python.exe"//python loaction pc
-            buildPython "C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python37_64/python.exe"//notebook
+            buildPython "C:/Users/jij11/AppData/Local/Programs/Python/Python38/python.exe"//notebook
             pip{
-                install "numpy"
-                //install "gensim"
-                //install "sklearn"
+                install "gensim"
+                install "sklearn"
             }
         }
         sourceSets {
