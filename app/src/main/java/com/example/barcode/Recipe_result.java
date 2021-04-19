@@ -2,10 +2,15 @@ package com.example.barcode;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,5 +75,16 @@ public class Recipe_result extends AppCompatActivity {
         for(int i = 0; i < size1; i++){
             pAdapter.addProcess(result_Process.get(i));
         }
+
+        Button delete_item = findViewById(R.id.Delete_item);
+        delete_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent1 = new Intent(v.getContext(), MainActivity.class);
+               intent1.putExtra("Frige", 1);
+               finish();
+               startActivity(intent1);
+            }
+        });
     }
 }

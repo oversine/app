@@ -101,12 +101,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    DbClasses.RecipeBasic recipeBasic = listRecipe.get(pos);
+                    DbClasses.RecipeBasic recipeBasic = listRecipe.get(pos); // 클릭한 특정 아이템 위치
                     CheckBox checkBox = (CheckBox) v;
 
                     if (!recipeBasic.getSelected() && checkBox.isChecked()){
                         recipeBasic.setSelected(true);
-                        DatabaseBuilder.RecipeB_DB.DaoRB().update(recipeBasic);
+                        DatabaseBuilder.RecipeB_DB.DaoRB().update(recipeBasic); // 체크박스를 클릭했을 때, 체크박스가 false인 경우 true로 바꿔주고 DB에 업데이트
                         notifyDataSetChanged();
                         Toast.makeText(v.getContext(),"북마크 등록이 완료되었습니다.", Toast.LENGTH_LONG).show();
                     }else if(recipeBasic.getSelected()){

@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         });
         mBottomNV.setSelectedItemId(R.id.home);
 
-        findViewById(R.id.menuSet).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.menuSet).setOnClickListener(new View.OnClickListener() { // 북마크, 수동 등록, 설정 팝업메뉴
             @Override
             public void onClick(final View v) {
                 final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), v);
@@ -108,6 +108,16 @@ public class MainActivity extends AppCompatActivity {
                 popupMenu.show();
             }
         });
+        Intent intentTest = getIntent();
+        int test = intentTest.getIntExtra("Frige", 0);
+        if (test == 1){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frameLayout, new Fragment1());
+            fragmentTransaction.commit();
+        }
+
+
     }
     private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
         String tag = String.valueOf(id);

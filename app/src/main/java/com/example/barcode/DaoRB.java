@@ -14,7 +14,7 @@ public interface DaoRB {
     @Query("SELECT * FROM RecipeBasic")
     List<DbClasses.RecipeBasic> getRecipe();
 
-    @Query("SELECT * FROM RecipeBasic WHERE isSelected = 1")
+    @Query("SELECT * FROM RecipeBasic WHERE isSelected = 1") // 레시피 북마크, 체크박스 true 값만 리사이클러뷰 갱신
     List<DbClasses.RecipeBasic> getBookMark();
 
     @Query("SELECT recipename FROM RecipeBasic WHERE recipecode = :input")//바코드로 상품명 검색
