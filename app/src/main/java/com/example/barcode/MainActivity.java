@@ -4,11 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.PopupMenu;
-import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,17 +12,11 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.PreferenceManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
@@ -40,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // 밤에 실행시 다크 모드 관련 실행직후 검은화면 뜨는 문제 해결 필요
         ////////////////////////////////////// 앱 시작시 php서버에 접속하여 db를 불러와 room에 저장
-
+/*
         builder = new DatabaseBuilder(this); //DB초기화
         sqlConnect = new SqlConnect();               //객체생성
 
@@ -60,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
+ */
         ////////////////python execution part(embedding)_test_ver
         //src/main/python/myscript.py를 수정할 것
         if (! Python.isStarted()) {
@@ -68,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         Python py = Python.getInstance();
         PyObject pyobj = py.getModule("myscript");//file name
 
-        PyObject obj = pyobj.callAttr("main");//function name
-        System.out.println(obj.toString());
+        PyObject obj = pyobj.callAttr("import_embedding_model");//function name
+        //System.out.println(obj.toString());
         ///////////////
         //////////////////////////////////////
         mBottomNV = findViewById(R.id.navigation);
