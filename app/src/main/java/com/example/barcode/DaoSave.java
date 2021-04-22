@@ -13,10 +13,10 @@ import java.util.List;
 
 @Dao
 public interface DaoSave {
-    @Query("SELECT * FROM SavePd")
+    @Query("SELECT * FROM SavePd ORDER BY MainDate")
     List<SavePd> getAll();
 
-    @Query("SELECT * FROM SavePd WHERE MainDate <= :input")
+    @Query("SELECT * FROM SavePd WHERE MainDate <= :input ORDER BY MainDate")
     List<SavePd> getDate(Date input);
 
     @Insert
