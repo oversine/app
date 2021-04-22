@@ -18,6 +18,8 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.concurrent.ExecutionException;
+
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
     DatabaseBuilder builder;
@@ -30,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // 밤에 실행시 다크 모드 관련 실행직후 검은화면 뜨는 문제 해결 필요
         ////////////////////////////////////// 앱 시작시 php서버에 접속하여 db를 불러와 room에 저장
-/*
         builder = new DatabaseBuilder(this); //DB초기화
         sqlConnect = new SqlConnect();               //객체생성
 
@@ -50,18 +51,15 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
- */
         ////////////////python execution part(embedding)_test_ver
-        //src/main/python/myscript.py를 수정할 것
+        Object [] arg = new Object[]{"감자", "고구마", "사과"};
         if (! Python.isStarted()) {
             Python.start(new AndroidPlatform(this));
         }
         Python py = Python.getInstance();
-        PyObject pyobj = py.getModule("myscript");//file name
-
-        PyObject obj = pyobj.callAttr("import_embedding_model");//function name
-        //System.out.println(obj.toString());
+        PyObject pyobj = py.getModule("myscript");
+        PyObject compute_similarity = pyobj.callAttr("compute_similarity", arg);
+        System.out.println(compute_similarity.toString());
         ///////////////
         //////////////////////////////////////
         mBottomNV = findViewById(R.id.navigation);
