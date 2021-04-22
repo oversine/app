@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ////////////////python execution part(embedding)_test_ver
+        ////////////////python execution
         Object [] arg = new Object[]{"감자", "고구마", "사과"};
         if (! Python.isStarted()) {
             Python.start(new AndroidPlatform(this));
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         PyObject compute_similarity = pyobj.callAttr("compute_similarity", arg);
         System.out.println(compute_similarity.toString());
         ///////////////
-        //////////////////////////////////////
+
         mBottomNV = findViewById(R.id.navigation);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
             @Override
