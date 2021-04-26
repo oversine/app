@@ -1,5 +1,6 @@
 package com.example.barcode;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -45,22 +46,14 @@ public class MainActivity extends AppCompatActivity {
             builder.addRBtuples(builder.getRBData(rbtask.execute().get()), DatabaseBuilder.RecipeB_DB);
             builder.addRMtuples(builder.getRMData(rmtask.execute().get()), DatabaseBuilder.RecipeM_DB);
             builder.addRPtuples(builder.getRPData(rptask.execute().get()), DatabaseBuilder.RecipeP_DB);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
-        ////////////////python execution
-        Object [] arg = new Object[]{"감자", "고구마", "사과"};
-        if (! Python.isStarted()) {
-            Python.start(new AndroidPlatform(this));
-        }
-        Python py = Python.getInstance();
-        PyObject pyobj = py.getModule("myscript");
-        PyObject compute_similarity = pyobj.callAttr("compute_similarity", arg);
-        System.out.println(compute_similarity.toString());
-        ///////////////
+        Object[] arg = new Object[]{"소고기", "참치", "연어"};//예시
+        String[] res;
+        res = compute_sim(arg, this);
+        System.out.println(DatabaseBuilder.RecipeB_DB.DaoRB().search_RecipeName(res[0], res[1], res[2], res[3], res[4], res[5])); //상품명
 
         mBottomNV = findViewById(R.id.navigation);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
@@ -109,6 +102,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    ////////////////python execution
+    public static String[] compute_sim(Object[] pn_arr, Context context){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+        Python py = Python.getInstance();
+        String[] temp_rse;
+        PyObject pyobj = py.getModule("myscript");
+        PyObject compute_similarity = pyobj.callAttr("compute_similarity", pn_arr);
+        Object temp = compute_similarity;
+        temp = temp.toString();
+        temp_rse = temp.toString().split("/");
+        return temp_rse;
+    }
+    ///////////////
     private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
         String tag = String.valueOf(id);
         FragmentManager fragmentManager = getSupportFragmentManager();

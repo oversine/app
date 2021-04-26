@@ -37,10 +37,14 @@ def vectors_pn(document_list):
             weight_token = 1 / index
             count += 1
             #리스트의 모든 값을 불러와서 백터값을 구함
-            if docs_vec is None:
-                docs_vec = word2vec_model[document_list[i][j]] * weight_token * (count)
-            else:
-                docs_vec = docs_vec + word2vec_model[document_list[i][j]] * weight_token * (count)
+            try:
+                if docs_vec is None:
+                    docs_vec = word2vec_model[document_list[i][j]] * weight_token * (count)
+                else:
+                    docs_vec = docs_vec + word2vec_model[document_list[i][j]] * weight_token * (count)
+            except KeyError as e:
+                print(e)
+
         #더한 명사의 양으로 나눔
         if docs_vec is not None:
             docs_vec = docs_vec / count
@@ -59,6 +63,7 @@ def get_instance(*input):
 #백터끼리의 유사도 계산
 def compute_similarity(*input_list):
     #각 백터끼리의 코사인 유사도를 구함
+    res_string = ""
     temp = input_list
     document_embedding_list = import_recipe_vector() #recipe_vector
     input_list_vec = vectors_pn(temp) #input_words
@@ -74,6 +79,5 @@ def compute_similarity(*input_list):
     result = []
     print()
     for i in range(6):
-        print(sim_scores[i][0])
-        result.append(sim_scores[i][0])
-    return result
+        res_string = res_string + str(sim_scores[i][0]) + "/"
+    return res_string
