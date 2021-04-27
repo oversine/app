@@ -85,7 +85,7 @@ public class Fragment2 extends Fragment {
         recyclerView.setAdapter(rAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), 1));
 
-        RcTable = DatabaseBuilder.RecipeB_DB.DaoRB().search_recommend(res[0], res[1], res[2], res[3], res[4], res[5]);
+        RcTable = DatabaseBuilder.RecipeB_DB.DaoRB().search_recommend(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]);
         int size1 = RcTable.size();
         for(int i = 0; i < size1; i++){
             rAdapter.addRecipe(RcTable.get(i));

@@ -74,10 +74,10 @@ def compute_similarity(*input_list):
     #상품명과 유사한 상위 5개 레시피 추출s
     sim_scores = list(enumerate(cosine_similarities[0]))###temp_a 쓸때 index = 0 아니면 pn_num
     sim_scores = sorted(sim_scores, key = lambda x: x[1], reverse = True)
-    sim_scores = sim_scores[0:6]#출력할 레시피 수 지정
+    sim_scores = sim_scores[0:10]#출력할 레시피 수 지정
     #결과 확인
     result = []
     print()
-    for i in range(6):
+    for i in range(10):
         res_string = res_string + str(sim_scores[i][0]) + "/"
     return res_string
