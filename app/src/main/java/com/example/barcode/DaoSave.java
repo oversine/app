@@ -19,6 +19,9 @@ public interface DaoSave {
     @Query("SELECT * FROM SavePd WHERE MainDate <= :input ORDER BY MainDate")
     List<SavePd> getDate(Date input);
 
+    @Query("SELECT PdName FROM SavePD")
+    List<String> getPdName();
+
     @Insert
     void insert(SavePd savePd);
 
