@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+        MainActivity.init_python(this); //init_python
 
         mBottomNV = findViewById(R.id.navigation);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
@@ -98,6 +99,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
     ////////////////python execution
+    public static void init_python(Context context) {
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+        Python py = Python.getInstance();
+        PyObject pyobj = py.getModule("myscript");
+        PyObject import_embedding_model = pyobj.callAttr("import_embedding_model");
+        PyObject import_recipe_vector = pyobj.callAttr("import_recipe_vector");
+    }
+
     public static String[] compute_sim(Object[] pn_arr, Context context){
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(context));
