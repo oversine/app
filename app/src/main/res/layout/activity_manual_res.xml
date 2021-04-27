@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
@@ -29,10 +30,18 @@
         android:layout_marginVertical="20dp"
         android:layout_marginHorizontal="10dp"
         android:gravity="center_vertical">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_ingredients"
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="auto">
+            </com.google.android.material.tabs.TabLayout>>
+
+        <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="300dp"
+            android:id="@+id/viewPager"/>
     </LinearLayout>
 
 
@@ -72,26 +81,21 @@
         android:background="@drawable/border_layout"
         android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="유통기한"
-            android:textSize="12sp"/>
-
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:layout_weight="1"
             android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
             android:text="1999-01-01"
             android:lines="1"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="26sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/dateBtn"
@@ -100,7 +104,6 @@
             android:onClick="mOnClick_DatePick"
             android:layout_gravity="center"
             android:lines="1"
-            android:layout_weight="1"
             android:text="기한설정"
             android:textSize="12sp"/>
     </LinearLayout>

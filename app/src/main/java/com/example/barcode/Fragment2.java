@@ -12,11 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +27,9 @@ public class Fragment2 extends Fragment {
 
     private RecyclerView recyclerView;
     private MainAdapter mAdapter;
+    private RecipeAdapter rAdapter;
     private List<SavePd> saveDate;
+    private List<DbClasses.RecipeBasic> RcTable = new ArrayList<>();
     private LinearLayoutManager mLayoutManager;
     private Date listDate;
 
@@ -70,6 +74,22 @@ public class Fragment2 extends Fragment {
         for(int i = 0; i < size; i++){
             mAdapter.addData(saveDate.get(i));
         }
+
+        recyclerView = view.findViewById(R.id.recyclerView_main2);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rAdapter = new RecipeAdapter(RcTable);
+        recyclerView.setAdapter(rAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), 1));
+
+        RcTable = DatabaseBuilder.RecipeB_DB.DaoRB().search_RecipeName1();
+        int size1 = RcTable.size();
+        for(int i = 0; i < size1; i++){
+            rAdapter.addRecipe(RcTable.get(i));
+        }
+
+
+
         return view;
     }
 

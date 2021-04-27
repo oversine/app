@@ -88,7 +88,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = getAdapterPosition();
+                    int pos = getBindingAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
                         Intent intent = new Intent(v.getContext(), Recipe_result.class);
                         String code = listRecipe.get(pos).getRecipecode();
@@ -100,7 +100,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
             BookMarkImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = getAdapterPosition();
+                    int pos = getBindingAdapterPosition();
                     DbClasses.RecipeBasic recipeBasic = listRecipe.get(pos); // 클릭한 특정 아이템 위치
                     CheckBox checkBox = (CheckBox) v;
 

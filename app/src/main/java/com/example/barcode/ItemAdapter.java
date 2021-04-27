@@ -69,11 +69,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = getAdapterPosition();
+                    int pos = getBindingAdapterPosition();
+                    Manual_Res manual_res = Manual_Res.manual_res;
                     if (pos != RecyclerView.NO_POSITION) {
-                        if (mListener != null) {
-                            mListener.onItemClick(v, pos);
-                        }
+                        Intent intent = new Intent(v.getContext(), Manual_Res.class);
+                        intent.addFlags (Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        String code = listitem.get(pos).getName();
+                        String url = listitem.get(pos).getItemImg();
+                        int date = listitem.get(pos).getDate();
+                        intent.putExtra("식품명", code);
+                        intent.putExtra("주소", url);
+                        intent.putExtra("유통기한", date);
+                        v.getContext().startActivity(intent);
+                        manual_res.finish();
+                        manual_res.overridePendingTransition(0,0);
                     }
                 }
             });
