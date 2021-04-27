@@ -50,11 +50,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Object[] arg = new Object[]{"소고기", "참치", "연어"};//예시
-        String[] res;
-        res = compute_sim(arg, this);
-        System.out.println(DatabaseBuilder.RecipeB_DB.DaoRB().search_RecipeName(res[0], res[1], res[2], res[3], res[4], res[5])); //상품명
-
         mBottomNV = findViewById(R.id.navigation);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
             @Override

@@ -23,8 +23,8 @@ public interface DaoRB {
     @Query("SELECT imageurl FROM RecipeBasic WHERE recipecode = :input")//코드로 레시피 이미지 검색
     String search_RecipeImg(String input);
 
-    @Query("SELECT recipename FROM RecipeBasic WHERE recipecode = :input1 OR recipecode = :input2 OR recipecode = :input3 OR recipecode = :input4 OR recipecode = :input5 OR recipecode = :input6 ")
-    String search_RecipeName(String input1, String input2, String input3, String input4, String input5, String input6);
+    @Query("SELECT * FROM RecipeBasic WHERE recipecode = :input1 OR recipecode = :input2 OR recipecode = :input3 OR recipecode = :input4 OR recipecode = :input5 OR recipecode = :input6 ")
+    List<DbClasses.RecipeBasic> search_RecipeName(String input1, String input2, String input3, String input4, String input5, String input6);
 
     @Query("SELECT recipename FROM RecipeBasic")
     String search_RecipeName();

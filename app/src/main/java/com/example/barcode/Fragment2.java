@@ -35,6 +35,10 @@ public class Fragment2 extends Fragment {
         PreferenceManager.setDefaultValues(getActivity(), R.xml.settings_preference, false);
 
         Button scanBtn = view.findViewById(R.id.barcode_scan);
+        String[] res;
+        Object[] arg = new Object[]{"소고기", "참치", "연어"};//예시
+        res = MainActivity.compute_sim(arg, getActivity());
+        System.out.println(DatabaseBuilder.RecipeB_DB.DaoRB().search_RecipeName(res[0], res[1], res[2], res[3], res[4], res[5])); //상품명
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
