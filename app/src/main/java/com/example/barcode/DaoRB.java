@@ -24,7 +24,7 @@ public interface DaoRB {
     String search_RecipeImg(String input);
 
     @Query("SELECT * FROM RecipeBasic WHERE recipecode = :input1 OR recipecode = :input2 OR recipecode = :input3 OR recipecode = :input4 OR recipecode = :input5 OR recipecode = :input6 ")
-    List<DbClasses.RecipeBasic> search_RecipeName1(String input1, String input2, String input3, String input4, String input5, String input6);
+    List<DbClasses.RecipeBasic> search_recommend(String input1, String input2, String input3, String input4, String input5, String input6);
 
     @Query("SELECT recipename FROM RecipeBasic")
     String search_RecipeName();

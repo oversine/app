@@ -42,7 +42,6 @@ public class Fragment2 extends Fragment {
         String[] res;
         Object[] arg = new Object[]{"소고기", "참치", "연어"};//예시
         res = MainActivity.compute_sim(arg, getActivity());
-        System.out.println(DatabaseBuilder.RecipeB_DB.DaoRB().search_RecipeName(res[0], res[1], res[2], res[3], res[4], res[5])); //상품명
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +85,7 @@ public class Fragment2 extends Fragment {
         recyclerView.setAdapter(rAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), 1));
 
-        RcTable = DatabaseBuilder.RecipeB_DB.DaoRB().search_RecipeName1();
+        RcTable = DatabaseBuilder.RecipeB_DB.DaoRB().search_recommend(res[0], res[1], res[2], res[3], res[4], res[5]);
         int size1 = RcTable.size();
         for(int i = 0; i < size1; i++){
             rAdapter.addRecipe(RcTable.get(i));
