@@ -42,7 +42,7 @@ public class SqlConnect extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-           // target = "http://192.168.55.169/get_Barcode.php";
+            //target = "http://192.168.55.169/get_Barcode.php";
            target = "http://180.71.251.148:8001/get_Barcode.php";
         }
 
