@@ -36,7 +36,7 @@ import java.util.Locale;
 public class Manual_Res extends AppCompatActivity {
 
     private Product_Database pd;
-    public Manual_Res manual_res;
+    public static Manual_Res manual_res;
 
 
     String itemImg;

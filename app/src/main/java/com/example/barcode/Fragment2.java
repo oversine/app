@@ -39,7 +39,7 @@ public class Fragment2 extends Fragment {
         PreferenceManager.setDefaultValues(getActivity(), R.xml.settings_preference, false);
 
         String[] res;
-        Object[] arg = new Object[]{"소고기", "참치", "연어"};
+        Object[] arg = new Object[]{"버섯"};
         try {
             Object[] temp;
             temp = Product_Database.getInstance(getActivity()).daoSave().getPdName().toArray();
@@ -78,7 +78,7 @@ public class Fragment2 extends Fragment {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
         cal.add(Calendar.DATE, userDate); // 현재 날짜 및 시간 + 설정값
         String datePlus = dateFormat.format(cal.getTime());
         try {
