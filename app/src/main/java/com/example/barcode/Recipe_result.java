@@ -80,10 +80,8 @@ public class Recipe_result extends AppCompatActivity {
         delete_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent1 = new Intent(v.getContext(), MainActivity.class);
-               intent1.putExtra("Frige", 1);
+                ((MainActivity)MainActivity.context).BottomNavigate(R.id.frige);
                finish();
-               startActivity(intent1);
             }
         });
     }

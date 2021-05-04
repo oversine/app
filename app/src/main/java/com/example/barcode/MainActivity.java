@@ -25,9 +25,13 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
     DatabaseBuilder builder;
     SqlConnect sqlConnect;
+    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        context = this;
+
         setTheme(R.style.Theme_Barcode);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -87,15 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 popupMenu.show();
             }
         });
-        Intent intentTest = getIntent();
-        int test = intentTest.getIntExtra("Frige", 0);
-        if (test == 1){
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frameLayout, new Fragment1());
-            fragmentTransaction.commit();
-        }
-
 
     }
     ////////////////python execution
@@ -123,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         return temp_rse;
     }
     ///////////////
-    private void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
+    public void BottomNavigate(int id) {  //BottomNavigation 페이지 변경
         String tag = String.valueOf(id);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -144,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
             }else {
                 fragment = new Fragment3();
             }
-
             fragmentTransaction.replace(R.id.frameLayout, fragment, tag);
         } else {
             fragmentTransaction.show(fragment);
@@ -154,4 +148,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.commitNow();
     }
+
 }

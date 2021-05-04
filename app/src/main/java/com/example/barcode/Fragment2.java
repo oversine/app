@@ -38,7 +38,6 @@ public class Fragment2 extends Fragment {
 
         PreferenceManager.setDefaultValues(getActivity(), R.xml.settings_preference, false);
 
-        Button scanBtn = view.findViewById(R.id.barcode_scan);
         String[] res;
         Object[] arg = new Object[]{"소고기", "참치", "연어"};
         try {
@@ -54,6 +53,8 @@ public class Fragment2 extends Fragment {
         //System.out.println(arg[0]);
         res = MainActivity.compute_sim(arg, getActivity());
 
+
+        Button scanBtn = view.findViewById(R.id.barcode_scan);
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,15 +103,6 @@ public class Fragment2 extends Fragment {
         for(int i = 0; i < size1; i++){
             rAdapter.addRecipe(RcTable.get(i));
         }
-
-
-
         return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
     }
 }

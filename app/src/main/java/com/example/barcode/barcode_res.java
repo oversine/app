@@ -39,8 +39,11 @@ public class barcode_res extends AppCompatActivity {
 
         String result = "상품명:\t"+result_pd +"\n\r";
 
-        if(result == null){
-            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+        if(result_pd == null){
+            Toast.makeText(this, "다시 인식해주세요.", Toast.LENGTH_LONG).show();
+            Intent restart = new Intent(this, scan.class);
+            startActivity(restart);
+            finish();
         }
             else {
                 textView1 = findViewById(R.id.textView2);

@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabMode="auto">
-            </com.google.android.material.tabs.TabLayout>>
+            </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
@@ -77,7 +77,7 @@
         android:orientation="horizontal"
         android:padding="10dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginVertical="50dp"
         android:background="@drawable/border_layout"
         android:gravity="center_horizontal">
 
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="60dp"
             android:text="1999-01-01"
             android:lines="1"
             android:textColor="@color/black"
@@ -113,7 +113,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_marginTop="80dp"
         android:layout_marginHorizontal="10dp"
         android:background="@drawable/border_layout"
         android:gravity="center_horizontal">
