@@ -43,9 +43,9 @@ public class Fragment2 extends Fragment {
         try {
             Object[] temp;
             temp = Product_Database.getInstance(getActivity()).daoSave().getPdName().toArray();
-            if(temp.length > 1){
+            if(temp.length > 0){
                 arg = temp;
-                System.out.println(temp[0]+"asd");
+                System.out.println(temp[0]+"-test");
             }
         }catch(Exception e) {
             System.out.println(e.getMessage());
