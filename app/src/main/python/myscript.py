@@ -42,6 +42,11 @@ def vectors_pn(document_list):
                     docs_vec = docs_vec + word2vec_model[document_list[i][j]] * weight_token * (count)
             except KeyError as e:
                 print(e)
+                ####상품명으로 검색 시 정확도를 심각하게 저하실 수 있음 수정 필요
+                if docs_vec is None:
+                     docs_vec = word2vec_model['물']
+                else:
+                     docs_vec = docs_vec + word2vec_model['물']
 
         #더한 명사의 양으로 나눔
         if docs_vec is not None:

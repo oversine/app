@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import java.io.File;
 import java.util.ArrayList;
 
 public class DatabaseBuilder { // 데이터베이스 빌더
@@ -107,6 +107,7 @@ public class DatabaseBuilder { // 데이터베이스 빌더
                 result.add(item.getString(TAG_f));
                 result.add(item.getString(TAG_g));
                 //System.out.println(item.getString(TAG_a)); //test
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

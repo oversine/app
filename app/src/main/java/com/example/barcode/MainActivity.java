@@ -19,6 +19,7 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.File;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,33 +27,42 @@ public class MainActivity extends AppCompatActivity {
     DatabaseBuilder builder;
     SqlConnect sqlConnect;
     public static Context context;
+    File fileb; File filep; File fileba; File filem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         context = this;
-
         setTheme(R.style.Theme_Barcode);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // 밤에 실행시 다크 모드 관련 실행직후 검은화면 뜨는 문제 해결 필요
         ////////////////////////////////////// 앱 시작시 php서버에 접속하여 db를 불러와 room에 저장
+        String base_path = "/data/data/com.example.barcode/databases/";
+        String bc = base_path + "Barcode_1.0.0.db";
+        String rb = base_path + "RecipeBasic_1.0.0.db";
+        String rm = base_path + "RecipeMaterial_1.0.0.db";
+        String rp = base_path + "RecipeProcess_1.0.0.db";
+
+        fileb = new File(bc); filep = new File(rp); fileba = new File(rb); filem = new File(rm);
         builder = new DatabaseBuilder(this);
         sqlConnect = new SqlConnect();
 
-        SqlConnect.Get_Barcode_php task = new SqlConnect.Get_Barcode_php();
-        SqlConnect.Get_RecipeBasic_php rbtask = new SqlConnect.Get_RecipeBasic_php();
-        SqlConnect.Get_RecipeMaterial_php rmtask = new SqlConnect.Get_RecipeMaterial_php();
-        SqlConnect.Get_RecipeProcess_php rptask = new SqlConnect.Get_RecipeProcess_php();
-        try {
-            builder = new DatabaseBuilder(this); //DB초기화
-            builder.addBCtuples(builder.getBCData(task.execute().get()), DatabaseBuilder.Barcode_DB);
-            builder.addRBtuples(builder.getRBData(rbtask.execute().get()), DatabaseBuilder.RecipeB_DB);
-            builder.addRMtuples(builder.getRMData(rmtask.execute().get()), DatabaseBuilder.RecipeM_DB);
-            builder.addRPtuples(builder.getRPData(rptask.execute().get()), DatabaseBuilder.RecipeP_DB);
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+        if(!fileb.exists() || !filep.exists() || !fileba.exists() || !filem.exists()) {
+            SqlConnect.Get_Barcode_php task = new SqlConnect.Get_Barcode_php();
+            SqlConnect.Get_RecipeBasic_php rbtask = new SqlConnect.Get_RecipeBasic_php();
+            SqlConnect.Get_RecipeMaterial_php rmtask = new SqlConnect.Get_RecipeMaterial_php();
+            SqlConnect.Get_RecipeProcess_php rptask = new SqlConnect.Get_RecipeProcess_php();
+            try {
+                builder.addBCtuples(builder.getBCData(task.execute().get()), DatabaseBuilder.Barcode_DB);
+                builder.addRBtuples(builder.getRBData(rbtask.execute().get()), DatabaseBuilder.RecipeB_DB);
+                builder.addRMtuples(builder.getRMData(rmtask.execute().get()), DatabaseBuilder.RecipeM_DB);
+                builder.addRPtuples(builder.getRPData(rptask.execute().get()), DatabaseBuilder.RecipeP_DB);
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+
         MainActivity.init_python(this); //init_python
 
         mBottomNV = findViewById(R.id.navigation);
