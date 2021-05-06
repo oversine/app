@@ -80,20 +80,24 @@ public class Manual_Res extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
-                String nextDate = tv.getText().toString();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
-                try {
-                    date = simpleDateFormat.parse(nextDate); // String 날짜 Date로 변환하여 DB 저장
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (itemImg == null) {
-                    pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date));
+                if (itemText.getText().toString().replace(" ", "").equals("")) {
+                    Toast.makeText(v.getContext(), "식재료를 선택하거나 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), itemImg, date));
+                    Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
+                    String nextDate = tv.getText().toString();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+                    try {
+                        date = simpleDateFormat.parse(nextDate); // String 날짜 Date로 변환하여 DB 저장
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (itemImg == null) {
+                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date));
+                    } else {
+                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), itemImg, date));
+                    }
+                    finish();
                 }
-                finish();
             }
         });
 
@@ -101,27 +105,30 @@ public class Manual_Res extends AppCompatActivity {
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
-                String nextDate = tv.getText().toString();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
-                try {
-                    date = simpleDateFormat.parse(nextDate);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (itemImg == null) {
-                    pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date));
-                    Intent intent = new Intent(v.getContext(), Manual_Res.class);
-                    startActivity(intent);
+                if (itemText.getText().toString().replace(" ", "").equals("")) {
+                    Toast.makeText(v.getContext(), "식재료를 선택하거나 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), itemImg, date));
-                    Intent intent = new Intent(v.getContext(), Manual_Res.class);
-                    startActivity(intent);
+                    Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
+                    String nextDate = tv.getText().toString();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+                    try {
+                        date = simpleDateFormat.parse(nextDate);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (itemImg == null) {
+                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date));
+                        Intent intent = new Intent(v.getContext(), Manual_Res.class);
+                        startActivity(intent);
+                    } else {
+                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), itemImg, date));
+                        Intent intent = new Intent(v.getContext(), Manual_Res.class);
+                        startActivity(intent);
+                    }
+                    finish();
                 }
-                finish();
             }
         });
-
     }
 
     DatePickerDialog.OnDateSetListener mDateSetListener =

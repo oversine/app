@@ -1,16 +1,31 @@
 package com.example.barcode;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class SqlConnect extends AppCompatActivity {
 
@@ -28,7 +43,7 @@ public class SqlConnect extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             target = "http://192.168.55.169/get_Barcode.php";
-           //target = "http://180.71.251.148:8001/get_Barcode.php";
+           target = "http://180.71.251.148:8001/get_Barcode.php";
         }
 
         @Override
@@ -74,7 +89,7 @@ public class SqlConnect extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             target = "http://192.168.55.169/get_RecipeBasic.php";
-            //target = "http://180.71.251.148:8001/get_RecipeBasic.php";
+            target = "http://180.71.251.148:8001/get_RecipeBasic.php";
         }
 
         @Override
@@ -120,7 +135,7 @@ public class SqlConnect extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             target = "http://192.168.55.169/get_RecipeMaterial.php";
-            //target = "http://180.71.251.148:8001/get_RecipeMaterial.php";
+            target = "http://180.71.251.148:8001/get_RecipeMaterial.php";
         }
 
         @Override
@@ -166,7 +181,7 @@ public class SqlConnect extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             target = "http://192.168.55.169/get_RecipeProcess.php";
-            //target = "http://180.71.251.148:8001/get_RecipeProcess.php";
+            target = "http://180.71.251.148:8001/get_RecipeProcess.php";
         }
 
         @Override

@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>{
 
@@ -56,6 +57,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         notifyItemChanged(position, listdata.size());
     }
 
+    void setData(ArrayList<SavePd> reset){
+        listdata = reset;
+        notifyDataSetChanged();
+    }
+
+
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView ProductName;
@@ -70,6 +77,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
             img = itemView.findViewById(R.id.imageView);
             Item_delete = itemView.findViewById(R.id.PdDelete);
 
+
             Item_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,6 +86,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
 
                     if (pos != RecyclerView.NO_POSITION) {
                         removeItem(pos);
+                        setData(listdata);
                         Product_Database.getInstance(Item_delete.getContext()).daoSave().delete(savePd);
                     }
                 }
