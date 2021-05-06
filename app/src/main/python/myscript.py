@@ -4,7 +4,7 @@ def import_embedding_model(): #word2vec model
 
     from gensim.models import KeyedVectors
     import pickle
-    word2vec_model = KeyedVectors.load('/data/data/com.example.barcode/files/chaquopy/AssetFinder/app/Data/kowiki_word2vec_wordvectors')#embedding model import
+    word2vec_model = KeyedVectors.load('/data/data/com.example.barcode/files/chaquopy/AssetFinder/app/Data/kowiki_word2vec_wordvectors.data')#embedding model import
     print("word2vec model import")
     data_list.append(word2vec_model)
     #return word2vec_model
@@ -25,8 +25,6 @@ def vectors_pn(document_list):
     document_embedding_list = []
     docs_vec =None
     word2vec_model = data_list[0] #word2vec model import
-    print('embedding_model')####
-    print(word2vec_model['나물'])####
     count = 0
     #각 명사의 백터를 구한 뒤 더함
     for i in range(len(document_list)):
