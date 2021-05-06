@@ -40,19 +40,24 @@ public class Fragment2 extends Fragment {
 
         Button scanBtn = view.findViewById(R.id.barcode_scan);
         String[] res;
-        Object[] arg = new Object[]{"소고기", "참치", "연어"};
+        Object[] arg = new Object[]{"물"};
         try {
             Object[] temp;
             temp = Product_Database.getInstance(getActivity()).daoSave().getPdName().toArray();
-            if(temp.length > 1){
+            if(temp.length > 0){
                 arg = temp;
-                System.out.println(temp[0]+"asd");
             }
         }catch(Exception e) {
             System.out.println(e.getMessage());
         }
-        //System.out.println(arg[0]);
-        res = MainActivity.compute_sim(arg, getActivity());
+        finally{
+            System.out.println("식재료명");
+            for(int i =0; i<arg.length;i++){
+                System.out.println(arg[i]);
+            }
+            res = MainActivity.compute_sim(arg, getActivity());
+            System.out.println("compute_sim Complete");
+        }
 
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override

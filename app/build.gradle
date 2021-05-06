@@ -19,7 +19,8 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
         python {
-            buildPython "E:/python/3.8.6/python.exe"//python loaction pc
+            //buildPython "E:/python/3.8.6/python.exe"//python loaction pc
+            buildPython "C:/Users/jij11/AppData/Local/Programs/Python/Python38/python.exe"//python olactio pcn
             //buildPython "C:/Users/subin/AppData/Local/Programs/Python/Python38/python.exe"//notebook
             pip{
                 install "gensim"

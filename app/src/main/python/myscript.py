@@ -10,8 +10,8 @@ def import_embedding_model(): #word2vec model
     #return word2vec_model
 
 def import_recipe_vector(): #recipe_vector
-    import pickle
 
+    import pickle
     document_embedding_list = []
     with open("/data/data/com.example.barcode/files/chaquopy/AssetFinder/app/Data/document_embedding_list", "rb") as file: #recipe vector import
         temp = pickle.load(file)
@@ -19,14 +19,14 @@ def import_recipe_vector(): #recipe_vector
 
     print("recipe_vec import ")
     data_list.append(document_embedding_list)
-    #return document_embedding_list
 
 #상품명 평균백터 구하기
 def vectors_pn(document_list):
     document_embedding_list = []
     docs_vec =None
-    #word2vec_model = import_embedding_model() #word2vec model import
     word2vec_model = data_list[0] #word2vec model import
+    print('embedding_model')####
+    print(word2vec_model['나물'])####
     count = 0
     #각 명사의 백터를 구한 뒤 더함
     for i in range(len(document_list)):
@@ -54,18 +54,11 @@ def vectors_pn(document_list):
             docs_vec = None
     return document_embedding_list
 
-def get_instance(*input):
-    merged_data = []
-    merged_data.append(input)
-    print(merged_data)
-    return merged_data
-
 #백터끼리의 유사도 계산
 def compute_similarity(*input_list):
     #각 백터끼리의 코사인 유사도를 구함
     res_string = ""
-    temp = input_list
-    #document_embedding_list = import_recipe_vector() #recipe_vector
+    temp = [list(input_list)]
     document_embedding_list = data_list[1] #recipe_vector
     input_list_vec = vectors_pn(temp) #input_words
 
@@ -78,7 +71,9 @@ def compute_similarity(*input_list):
     sim_scores = sim_scores[0:10]#출력할 레시피 수 지정
     #결과 확인
     result = []
-    print()
+    print(sim_scores)
     for i in range(10):
-        res_string = res_string + str(sim_scores[i][0]) + "/"
+        out_temp = 0
+        out_temp = sim_scores[i][0] + 1
+        res_string = res_string + str(out_temp) + "/"
     return res_string
