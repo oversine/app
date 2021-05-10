@@ -4,7 +4,7 @@ def import_embedding_model(): #word2vec model
 
     from gensim.models import KeyedVectors
     import pickle
-    word2vec_model = KeyedVectors.load('/data/data/com.example.barcode/files/chaquopy/AssetFinder/app/Data/kowiki_word2vec_wordvectors.data')#embedding model import
+    word2vec_model = KeyedVectors.load('/data/data/com.sungkyul.barcode/files/chaquopy/AssetFinder/app/Data/kowiki_word2vec_wordvectors.data')#embedding model import
     print("word2vec model import")
     data_list.append(word2vec_model)
     #return word2vec_model
@@ -13,7 +13,7 @@ def import_recipe_vector(): #recipe_vector
 
     import pickle
     document_embedding_list = []
-    with open("/data/data/com.example.barcode/files/chaquopy/AssetFinder/app/Data/document_embedding_list", "rb") as file: #recipe vector import
+    with open("/data/data/com.sungkyul.barcode/files/chaquopy/AssetFinder/app/Data/document_embedding_list", "rb") as file: #recipe vector import
         temp = pickle.load(file)
         document_embedding_list = temp
 
@@ -45,8 +45,6 @@ def vectors_pn(document_list):
                 ####상품명으로 검색 시 정확도를 심각하게 저하실 수 있음 수정 필요
                 if docs_vec is None:
                      docs_vec = word2vec_model['물']
-                else:
-                     docs_vec = docs_vec + word2vec_model['물']
 
         #더한 명사의 양으로 나눔
         if docs_vec is not None:
