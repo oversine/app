@@ -11,6 +11,7 @@ import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,18 +37,20 @@ public class Fragment1 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_frige, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView1);
-
+        recyclerView.addItemDecoration(new RecyclerViewDecoration(30));
+        return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), 1));
-
 
         table = Product_Database.getInstance(getActivity()).daoSave().getAll();
         int size = table.size();
         for(int i = 0; i < size; i++){
             adapter.addData(table.get(i));
         }
-        return view;
     }
 }

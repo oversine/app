@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +18,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,17 +51,7 @@ public class Fragment3 extends Fragment {
         }
 
         recyclerView = view.findViewById(R.id.recyclerView2);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rAdapter = new RecipeAdapter(RcTable);
-        recyclerView.setAdapter(rAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), 1));
-
-        RcTable = DatabaseBuilder.RecipeB_DB.DaoRB().getRecipe();
-        int size = RcTable.size();
-        for(int i = 0; i < size; i++){
-            rAdapter.addRecipe(RcTable.get(i));
-        }
+        recyclerView.addItemDecoration(new RecyclerViewDecoration(30));
         return view;
     }
 
@@ -97,5 +90,20 @@ public class Fragment3 extends Fragment {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rAdapter = new RecipeAdapter(RcTable);
+        recyclerView.setAdapter(rAdapter);
+
+        RcTable.clear();
+        RcTable = DatabaseBuilder.RecipeB_DB.DaoRB().getRecipe();
+        int size = RcTable.size();
+        for(int i = 0; i < size; i++){
+            rAdapter.addRecipe(RcTable.get(i));
+        }
     }
 }

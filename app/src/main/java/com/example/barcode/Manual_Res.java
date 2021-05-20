@@ -73,7 +73,10 @@ public class Manual_Res extends AppCompatActivity {
         tv = findViewById(R.id.date);
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, datePuls);
-        tv.setText(cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DATE));
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DATE);
+        tv.setText(String.format("%02d-%02d-%02d", year,month,day));
 
 
         save = findViewById(R.id.save);
@@ -83,7 +86,7 @@ public class Manual_Res extends AppCompatActivity {
                 if (itemText.getText().toString().replace(" ", "").equals("")) {
                     Toast.makeText(v.getContext(), "식재료를 선택하거나 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "식재료를 저장했습니다.", Toast.LENGTH_SHORT).show();
                     String nextDate = tv.getText().toString();
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
                     try {
@@ -91,10 +94,11 @@ public class Manual_Res extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    nextDate = nextDate.substring(nextDate.indexOf("-")+1);
                     if (itemImg == null) {
-                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date));
+                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date, nextDate));
                     } else {
-                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), itemImg, date));
+                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), itemImg, date, nextDate));
                     }
                     finish();
                 }
@@ -108,7 +112,7 @@ public class Manual_Res extends AppCompatActivity {
                 if (itemText.getText().toString().replace(" ", "").equals("")) {
                     Toast.makeText(v.getContext(), "식재료를 선택하거나 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "식재료를 저장했습니다.", Toast.LENGTH_SHORT).show();
                     String nextDate = tv.getText().toString();
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
                     try {
@@ -116,12 +120,13 @@ public class Manual_Res extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    nextDate = nextDate.substring(nextDate.indexOf("-")+1);
                     if (itemImg == null) {
-                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date));
+                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date, nextDate));
                         Intent intent = new Intent(v.getContext(), Manual_Res.class);
                         startActivity(intent);
                     } else {
-                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), itemImg, date));
+                        pd.daoSave().insert(new SavePd(itemText.getText().toString(), tv.getText().toString(), itemImg, date, nextDate));
                         Intent intent = new Intent(v.getContext(), Manual_Res.class);
                         startActivity(intent);
                     }
@@ -137,7 +142,7 @@ public class Manual_Res extends AppCompatActivity {
                 public void onDateSet(DatePicker datePicker, int yy, int mm, int dd) {
                     // Date Picker에서 선택한 날짜를 TextView에 설정
                     TextView tv = findViewById(R.id.date);
-                    tv.setText(String.format(Locale.getDefault(), "%d-%d-%d", yy, mm + 1, dd));
+                    tv.setText(String.format(Locale.getDefault(), "%02d-%02d-%02d", yy, mm + 1, dd));
                 }
             };
 

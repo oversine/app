@@ -94,9 +94,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                         String code = listRecipe.get(pos).getRecipecode();
                         intent.putExtra("레시피코드", code);
                         v.getContext().startActivity(intent);
-                        }
                     }
-                });
+                }
+            });
             BookMarkImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -116,8 +116,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
                     }
                 }
             });
-            }
         }
+    }
 
     @Override // 필터 사용 검색기능
     public Filter getFilter() {
@@ -125,30 +125,30 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ItemViewHo
     }
 
     private Filter exampleFilter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                ArrayList<DbClasses.RecipeBasic> filterdeList = new ArrayList<>();
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<DbClasses.RecipeBasic> filterdeList = new ArrayList<>();
 
-                if (constraint == null || constraint.length() == 0 ) {
-                    listRecipe = unlistRecipe;
-                } else {
-                    String filterPattern = constraint.toString().toLowerCase().trim();
-                    for (DbClasses.RecipeBasic recipeBasic : unlistRecipe) {
-                        if (recipeBasic.getRecipename().toLowerCase().contains(filterPattern)) {
-                            filterdeList.add(recipeBasic);
-                        }
+            if (constraint == null || constraint.length() == 0 ) {
+                listRecipe = unlistRecipe;
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (DbClasses.RecipeBasic recipeBasic : unlistRecipe) {
+                    if (recipeBasic.getRecipename().toLowerCase().contains(filterPattern)) {
+                        filterdeList.add(recipeBasic);
                     }
-                    listRecipe = filterdeList;
                 }
-                FilterResults results = new FilterResults();
-                results.values = listRecipe;
-                return results;
+                listRecipe = filterdeList;
             }
+            FilterResults results = new FilterResults();
+            results.values = listRecipe;
+            return results;
+        }
 
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                listRecipe = (ArrayList<DbClasses.RecipeBasic>)results.values;
-                notifyDataSetChanged();
-            }
-        };
-    }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            listRecipe = (ArrayList<DbClasses.RecipeBasic>)results.values;
+            notifyDataSetChanged();
+        }
+    };
+}

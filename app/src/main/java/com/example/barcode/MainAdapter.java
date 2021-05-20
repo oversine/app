@@ -37,7 +37,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ItemViewHolder
     public void onBindViewHolder(@NonNull MainAdapter.ItemViewHolder itemViewHolder, int i) {
         SavePd savePd = listdata.get(i);
         itemViewHolder.IconName.setText(savePd.getPdName());
-        itemViewHolder.IconDate.setText(savePd.getPdDate());
+        itemViewHolder.IconDate.setText(savePd.getPdDay());
         Glide.with(itemViewHolder.itemView.getContext()).load(savePd.getPdImg()).into(itemViewHolder.IconImg);
     }
 

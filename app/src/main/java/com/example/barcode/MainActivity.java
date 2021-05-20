@@ -3,6 +3,7 @@ package com.example.barcode;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -101,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 popupMenu.show();
             }
         });
-
     }
     ////////////////python execution
     public static void init_python(Context context) {
@@ -158,4 +158,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.commitNowAllowingStateLoss();
     }
+
 }

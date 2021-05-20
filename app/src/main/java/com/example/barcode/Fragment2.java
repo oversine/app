@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +26,7 @@ import java.util.List;
 
 public class Fragment2 extends Fragment {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView, recyclerView2;
     private MainAdapter mAdapter;
     private RecipeAdapter rAdapter;
     private List<SavePd> saveDate;
@@ -39,25 +40,6 @@ public class Fragment2 extends Fragment {
         PreferenceManager.setDefaultValues(getActivity(), R.xml.settings_preference, false);
 
         Button scanBtn = view.findViewById(R.id.barcode_scan);
-        String[] res;
-        Object[] arg = new Object[]{"물"};
-        try {
-            Object[] temp;
-            temp = Product_Database.getInstance(getActivity()).daoSave().getPdName().toArray();
-            if(temp.length > 0){
-                arg = temp;
-            }
-        }catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-        finally{
-            System.out.println("식재료명");
-            for(int i =0; i<arg.length;i++){
-                System.out.println(arg[i]);
-            }
-            res = MainActivity.compute_sim(arg, getActivity());
-            System.out.println("compute_sim Complete");
-        }
 
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +50,15 @@ public class Fragment2 extends Fragment {
         });
 
         recyclerView = view.findViewById(R.id.recyclerView_main);
+
+        recyclerView2 = view.findViewById(R.id.recyclerView_main2);
+        recyclerView2.addItemDecoration(new RecyclerViewDecoration(15));
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
@@ -86,7 +77,7 @@ public class Fragment2 extends Fragment {
         cal.add(Calendar.DATE, userDate); // 현재 날짜 및 시간 + 설정값
         String datePlus = dateFormat.format(cal.getTime());
         try {
-        listDate = dateFormat.parse(datePlus); // 더한 결과값 String 타입 -> Date 변환
+            listDate = dateFormat.parse(datePlus); // 더한 결과값 String 타입 -> Date 변환
         }catch (Exception e){e.printStackTrace();}
 
         saveDate = Product_Database.getInstance(getActivity()).daoSave().getDate(listDate);
@@ -95,27 +86,36 @@ public class Fragment2 extends Fragment {
             mAdapter.addData(saveDate.get(i));
         }
 
-        recyclerView = view.findViewById(R.id.recyclerView_main2);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rAdapter = new RecipeAdapter(RcTable);
-        recyclerView.setAdapter(rAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), 1));
-
-        RcTable = DatabaseBuilder.RecipeB_DB.DaoRB().search_recommend(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]);
-        int size1 = RcTable.size();
-        for(int i = 0; i < size1; i++){
-            rAdapter.addRecipe(RcTable.get(i));
+        String[] res;
+        Object[] arg = new Object[]{"물"};
+        try {
+            Object[] temp;
+            temp = Product_Database.getInstance(getActivity()).daoSave().getPdName().toArray();
+            if(temp.length > 0){
+                arg = temp;
+            }
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
         }
+        finally{
+            System.out.println("식재료명");
+            for(int i =0; i<arg.length;i++){
+                System.out.println(arg[i]);
+            }
+            res = MainActivity.compute_sim(arg, getActivity());
+            System.out.println("compute_sim Complete");
 
+            recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity()));
+            rAdapter = new RecipeAdapter(RcTable);
+            recyclerView2.setAdapter(rAdapter);
 
-
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+            RcTable.clear();
+            RcTable = DatabaseBuilder.RecipeB_DB.DaoRB().search_recommend(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]);
+            int size1 = RcTable.size();
+            for(int i = 0; i < size1; i++){
+                rAdapter.addRecipe(RcTable.get(i));
+            }
+        }
     }
 }
+

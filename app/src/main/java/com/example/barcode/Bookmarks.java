@@ -47,7 +47,7 @@ public class Bookmarks extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         rAdapter = new RecipeAdapter(BookMarkTable);
         recyclerView.setAdapter(rAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, 1));
+        recyclerView.addItemDecoration(new RecyclerViewDecoration(30));
 
         BookMarkTable = DatabaseBuilder.RecipeB_DB.DaoRB().getBookMark();
         int size = BookMarkTable.size();

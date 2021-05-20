@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="8dp"
     android:gravity="center_vertical"
-    android:background="@android:color/white">
+    android:background="@drawable/border_layout">
 
     <ImageView
         android:id="@+id/imageView"
@@ -33,17 +33,16 @@
             android:textColor="@android:color/black"
             android:textSize="15sp"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/PdDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="content"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="13sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/PdDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:includeFontPadding="false"
-        android:text="test"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        android:textStyle="bold" />
     <ImageView
         android:id="@+id/PdDelete"
         android:layout_width="50dp"
@@ -51,5 +50,4 @@
         android:layout_marginStart="30dp"
         android:contentDescription="@string/StringValue"
         android:src="@drawable/ic_baseline_highlight_off_24"/>
-
 </LinearLayout>

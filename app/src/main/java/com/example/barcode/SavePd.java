@@ -15,12 +15,15 @@ public class SavePd {
     private String PdDate; // 유통기한 날짜
     private String PdImg;
     private Date MainDate; // 유통기한 날짜 Date 타입
+    private String PdDay;
 
-    public SavePd(String PdName, String PdDate, String PdImg, Date MainDate) {
+
+    public SavePd(String PdName, String PdDate, String PdImg, Date MainDate, String PdDay) {
         this.PdName = PdName;
         this.PdDate = PdDate;
         this.PdImg = PdImg;
         this.MainDate = MainDate;
+        this.PdDay = PdDay;
     }
 
     public int getId() {
@@ -61,6 +64,14 @@ public class SavePd {
 
     public void setMainDate(Date mainDate) {
         MainDate = mainDate;
+    }
+
+    public String getPdDay() {
+        return PdDay;
+    }
+
+    public void setPdDay(String pdDay) {
+        PdDay = pdDay;
     }
 }
 

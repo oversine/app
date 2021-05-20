@@ -59,13 +59,14 @@ public class barcode_res extends AppCompatActivity {
             save.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "상품을 저장했습니다.", Toast.LENGTH_SHORT).show();
                     String nextDate = tv.getText().toString();
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
                     try {
                         date = simpleDateFormat.parse(nextDate); // String 날짜 Date로 변환하여 DB 저장
                     }catch (Exception e){e.printStackTrace();}
-                    pd.daoSave().insert(new SavePd(textView1.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date));
+                    nextDate = nextDate.substring(nextDate.indexOf("-")+1);
+                    pd.daoSave().insert(new SavePd(textView1.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date, nextDate));
                     finish();
                 }
             });
@@ -74,13 +75,14 @@ public class barcode_res extends AppCompatActivity {
             addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "데이터 추가 성공", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "상품을 저장했습니다.", Toast.LENGTH_SHORT).show();
                 String nextDate = tv.getText().toString();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
                 try {
                     date = simpleDateFormat.parse(nextDate);
                 }catch (Exception e){e.printStackTrace();}
-                pd.daoSave().insert(new SavePd(textView1.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date));
+                nextDate = nextDate.substring(nextDate.indexOf("-")+1);
+                pd.daoSave().insert(new SavePd(textView1.getText().toString(), tv.getText().toString(), "https://1.bp.blogspot.com/-LlZp3x13e4A/YHWGwb6TeVI/AAAAAAAAAwQ/NBOAFFDDe7EkqwMXOTlfx91m934q_aWGwCLcBGAsYHQ/s0/icons_buy.png", date, nextDate));
                 Intent intent = new Intent(v.getContext(), scan.class);
                 startActivity(intent);
                 finish();
@@ -94,7 +96,7 @@ public class barcode_res extends AppCompatActivity {
                     public void onDateSet(DatePicker datePicker, int yy, int mm, int dd) {
                         // Date Picker에서 선택한 날짜를 TextView에 설정
                         TextView tv = findViewById(R.id.date);
-                        tv.setText(String.format(Locale.getDefault(),"%d-%d-%d", yy,mm+1,dd));
+                        tv.setText(String.format(Locale.getDefault(),"%d-%02d-%02d", yy,mm+1,dd));
                     }
                 };
 
