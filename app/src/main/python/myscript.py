@@ -20,32 +20,41 @@ def import_recipe_vector(): #recipe_vector
     print("recipe_vec import ")
     data_list.append(document_embedding_list)
 
+    #가중치 설정
+def softmax(x):
+    import numpy as np
+    res = np.exp(x - np.max(x))
+    return res/res.sum()
+
 #상품명 평균백터 구하기
 def vectors_pn(document_list):
     document_embedding_list = []
     docs_vec =None
-    word2vec_model = data_list[0] #word2vec model import
+    word2vec_model = data_list[0]
     count = 0
     #각 명사의 백터를 구한 뒤 더함
     for i in range(len(document_list)):
         index = 0
-        weight_token = 0
+        weight_token = []
+        weight_index = []
         for j in range(len(document_list[i])):
-            index = len(document_list[i])
-            weight_token = 1 / index
+            if j == 0:
+                for k in range(len(document_list[i])):
+                    weight_index.append(k)
+            weight_token = softmax(weight_index)
+            #print(weight_token)
             count += 1
             #리스트의 모든 값을 불러와서 백터값을 구함
             try:
                 if docs_vec is None:
-                    docs_vec = word2vec_model[document_list[i][j]] * weight_token * (count)
+                    docs_vec = word2vec_model[document_list[i][j]] * weight_token[j]
                 else:
-                    docs_vec = docs_vec + word2vec_model[document_list[i][j]] * weight_token * (count)
+                    docs_vec = docs_vec + word2vec_model[document_list[i][j]] * weight_token[j]
             except KeyError as e:
+                print(i)
                 print(e)
-                ####상품명으로 검색 시 정확도를 심각하게 저하실 수 있음 수정 필요
                 if docs_vec is None:
-                     docs_vec = word2vec_model['물']
-
+                    docs_vec = word2vec_model['물']
         #더한 명사의 양으로 나눔
         if docs_vec is not None:
             docs_vec = docs_vec / count

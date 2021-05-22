@@ -3,7 +3,6 @@ package com.example.barcode;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -63,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        ///////////////////// komoran test
+
+        ////////////////////
 
         MainActivity.init_python(this); //init_python
 
