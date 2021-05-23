@@ -19,8 +19,17 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.openkoreantext.processor.KoreanPosJava;
+import org.openkoreantext.processor.KoreanTokenJava;
+import org.openkoreantext.processor.OpenKoreanTextProcessorJava;
+import org.openkoreantext.processor.tokenizer.KoreanTokenizer;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import scala.collection.Seq;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
@@ -62,10 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        ///////////////////// komoran test
-
-        ////////////////////
-
         MainActivity.init_python(this); //init_python
 
         mBottomNV = findViewById(R.id.navigation);
@@ -159,6 +164,22 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.setPrimaryNavigationFragment(fragment);
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.commitNowAllowingStateLoss();
+    }
+    public static Object[] get_nouns(String input_text){ //명사 추출기
+        String text = input_text;
+        Object[] array_res;
+
+        CharSequence normalized = OpenKoreanTextProcessorJava.normalize(text);
+        Seq<KoreanTokenizer.KoreanToken> tokens = OpenKoreanTextProcessorJava.tokenize(normalized);
+        List<KoreanTokenJava> res = OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(tokens);
+        ArrayList<Object> arr = new ArrayList<Object>();
+        for (int i = 0; i < res.size(); i++) {
+            if (res.get(i).getPos() == KoreanPosJava.Noun) {
+                arr.add(res.get(i).getText());
+            }
+        }
+        array_res = arr.toArray();
+        return array_res;
     }
 
 }
