@@ -32,6 +32,8 @@ def vectors_pn(document_list):
     docs_vec =None
     word2vec_model = data_list[0]
     count = 0
+    print("document_list")
+    print(document_list)
     #각 명사의 백터를 구한 뒤 더함
     for i in range(len(document_list)):
         index = 0
@@ -64,14 +66,41 @@ def vectors_pn(document_list):
             docs_vec = None
     return document_embedding_list
 
+#상품명 벡터(이후 수정&추가)
+def test(*input):
+    res = None
+    print("input = ")
+    print(input)
+    print(len(input))
+    for i in range(len(input)):
+        for j in range(len(input[i])):
+            if(res is None):
+                res = vectors_pn(input[i][j])[0]
+                print(input[i])
+            else:
+                res = res + vectors_pn(input[i][j])[0]
+                print(input[i])
+    #for i in range(len(input)):
+    #    if(res is None):
+    #        res = vectors_pn(input[i])[0]
+    #        print(vectors_pn(input[i])[0])
+    #        print(input[i])
+    #    else:
+    #        res = res + vectors_pn((input[i]))[0]
+    #        print(vectors_pn(input[i])[0])
+    #        print(input[i])
+
+    return [res]
+
 #백터끼리의 유사도 계산
 def compute_similarity(*input_list):
     #각 백터끼리의 코사인 유사도를 구함
     res_string = ""
-    #temp = [list(input_list)]
+    temp = [list(input_list)]
     document_embedding_list = data_list[1] #recipe_vector
-    #input_list_vec = vectors_pn(temp) #input_words
-    input_list_vec = test(*input_list) #input_words
+    input_list_vec = vectors_pn(temp) #input_words
+    print(input_list_vec)
+    #input_list_vec = [test(*input_list)] #input_words
 
     from sklearn.metrics.pairwise import cosine_similarity
     cosine_similarities = cosine_similarity(input_list_vec, document_embedding_list)
@@ -88,15 +117,3 @@ def compute_similarity(*input_list):
         out_temp = sim_scores[i][0] + 1
         res_string = res_string + str(out_temp) + "/"
     return res_string
-#상품명 벡터
-def test(*input):
-    res = None
-    for i in range(len(input)):
-        for j in range(len(input[i])):
-            if(res is None):
-                res = vectors_pn(input[i][j])[0]
-            else:
-                res = res + vectors_pn(input[i][j])[0]
-    res = [res]
-    print(res)
-    return res

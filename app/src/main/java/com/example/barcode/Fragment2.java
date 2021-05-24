@@ -90,19 +90,18 @@ public class Fragment2 extends Fragment {
         try {
             Object[] temp;
             temp = Product_Database.getInstance(getActivity()).daoSave().getPdName().toArray();
-            for(int i =0;i<temp.length;i++){
 
-            }
             if(temp.length > 0){
+                temp = MainActivity.get_nouns(temp);
                 arg = temp;
             }
         }catch(Exception e) {
             System.out.println(e.getMessage());
         }
         finally{
-            System.out.println("식재료명");
+            System.out.print("식재료명 =");
             for(int i =0; i<arg.length;i++){
-                System.out.println(arg[i]);
+                System.out.print(arg[i]);
             }
             res = MainActivity.compute_sim(arg, getActivity());
             System.out.println("compute_sim Complete");
