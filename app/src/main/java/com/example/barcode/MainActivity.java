@@ -131,8 +131,7 @@ public class MainActivity extends AppCompatActivity {
         Python py = Python.getInstance();
         String[] temp_rse;
         PyObject pyobj = py.getModule("myscript");
-        PyObject compute_similarity = pyobj.callAttr("compute_similarity", pn_arr);
-        Object temp = compute_similarity;
+        Object temp = pyobj.callAttr("compute_similarity", pn_arr);
         temp = temp.toString();
         temp_rse = temp.toString().split("/");
         return temp_rse;
@@ -169,10 +168,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commitNowAllowingStateLoss();
     }
     public static Object[] get_nouns(String input_text){ //명사 추출기
-        String text = input_text;
         Object[] array_res;
 
-        CharSequence normalized = OpenKoreanTextProcessorJava.normalize(text);
+        CharSequence normalized = OpenKoreanTextProcessorJava.normalize(input_text);
         Seq<KoreanTokenizer.KoreanToken> tokens = OpenKoreanTextProcessorJava.tokenize(normalized);
         List<KoreanTokenJava> res = OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(tokens);
         ArrayList<Object> arr = new ArrayList<>();
@@ -192,15 +190,20 @@ public class MainActivity extends AppCompatActivity {
         Object[] res = new Object[input_text.length];
         HashSet<Object> arr = new HashSet<>();
 
-        for(int i =0;i<text.length;i++){
-            CharSequence normalized = OpenKoreanTextProcessorJava.normalize(text[i]);
+        for (String s : text) {//형태소 분석
+            CharSequence normalized = OpenKoreanTextProcessorJava.normalize(s);
             Seq<KoreanTokenizer.KoreanToken> tokens = OpenKoreanTextProcessorJava.tokenize(normalized);
             List<KoreanTokenJava> res_nouns = OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(tokens);
 
-            for (int f = 0; f < res_nouns.size(); f++) {
+            for (int f = 0; f < res_nouns.size(); f++) { //상품명 제거
                 if (res_nouns.get(f).getPos() == KoreanPosJava.Noun) {
-                    arr.add(res_nouns.get(f).getText());
-                    System.out.println("res_nouns.getText() = "+ f + res_nouns.get(f).getText());
+                    if (res_nouns.size() == 1) {
+                        arr.add(res_nouns.get(f).getText());
+                    } else if (res_nouns.size() > 1 && f > 0) {
+                        arr.add(res_nouns.get(f).getText());
+                    }
+                    //arr.add(res_nouns.get(f).getText());
+                    System.out.println("res_nouns.getText() = " + f + res_nouns.get(f).getText());
                 }
             }
             res = arr.toArray();
