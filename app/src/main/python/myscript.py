@@ -88,7 +88,7 @@ def compute_similarity(*input_list):
         out_temp = sim_scores[i][0] + 1
         res_string = res_string + str(out_temp) + "/"
     return res_string
-
+#상품명 벡터
 def test(*input):
     res = None
     for i in range(len(input)):

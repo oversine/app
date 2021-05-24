@@ -90,6 +90,9 @@ public class Fragment2 extends Fragment {
         try {
             Object[] temp;
             temp = Product_Database.getInstance(getActivity()).daoSave().getPdName().toArray();
+            for(int i =0;i<temp.length;i++){
+
+            }
             if(temp.length > 0){
                 arg = temp;
             }

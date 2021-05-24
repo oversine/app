@@ -116,14 +116,14 @@ public class MainActivity extends AppCompatActivity {
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(context));
         }
-        //String[] aa = new String[]{"제주 삼다수", "동원 참치", "태양초 고추장"};
-        //Object[] aaa = get_nouns(aa);
+        String[] aa = new String[]{"제주 삼다수", "동원 참치", "태양초 고추장"};
+        Object[] aaa = get_nouns(aa);
 
         Python py = Python.getInstance();
         PyObject pyobj = py.getModule("myscript");
         PyObject import_embedding_model = pyobj.callAttr("import_embedding_model");
         PyObject import_recipe_vector = pyobj.callAttr("import_recipe_vector");
-        //PyObject test = pyobj.callAttr("test", aaa);
+        PyObject test = pyobj.callAttr("test", aaa);
     }
 
     public static String[] compute_sim(Object[] pn_arr, Context context){
