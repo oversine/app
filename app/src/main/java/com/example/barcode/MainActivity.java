@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // 밤에 실행시 다크 모드 관련 실행직후 검은화면 뜨는 문제 해결 필요
+
         ////////////////////////////////////// 앱 시작시 php서버에 접속하여 db를 불러와 room에 저장
         String base_path = "/data/data/com.example.barcode/databases/";
         String bc = base_path + "Barcode_1.0.0.db";
@@ -71,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        MainActivity.init_python(this); //init_python
 
+        MainActivity.init_python(this); //init_python
         mBottomNV = findViewById(R.id.navigation);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
             @Override
@@ -115,10 +116,14 @@ public class MainActivity extends AppCompatActivity {
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(context));
         }
+        //String[] aa = new String[]{"제주 삼다수", "동원 참치", "태양초 고추장"};
+        //Object[] aaa = get_nouns(aa);
+
         Python py = Python.getInstance();
         PyObject pyobj = py.getModule("myscript");
         PyObject import_embedding_model = pyobj.callAttr("import_embedding_model");
         PyObject import_recipe_vector = pyobj.callAttr("import_recipe_vector");
+        //PyObject test = pyobj.callAttr("test", aaa);
     }
 
     public static String[] compute_sim(Object[] pn_arr, Context context){
@@ -172,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         CharSequence normalized = OpenKoreanTextProcessorJava.normalize(text);
         Seq<KoreanTokenizer.KoreanToken> tokens = OpenKoreanTextProcessorJava.tokenize(normalized);
         List<KoreanTokenJava> res = OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(tokens);
-        ArrayList<Object> arr = new ArrayList<Object>();
+        ArrayList<Object> arr = new ArrayList<>();
         for (int i = 0; i < res.size(); i++) {
             if (res.get(i).getPos() == KoreanPosJava.Noun) {
                 arr.add(res.get(i).getText());
@@ -182,4 +187,27 @@ public class MainActivity extends AppCompatActivity {
         return array_res;
     }
 
+    public static Object[] get_nouns(String[] input_text){ //명사 추출기
+        String[] text = input_text;
+        Object[] array_res;
+        ArrayList<Object> arr = new ArrayList<>();
+        //ArrayList<Object> res = new ArrayList<>();
+        Object[][] res = new Object[1][input_text.length];
+
+        for(int i =0;i<text.length;i++){
+            arr.clear();
+            CharSequence normalized = OpenKoreanTextProcessorJava.normalize(text[i]);
+            Seq<KoreanTokenizer.KoreanToken> tokens = OpenKoreanTextProcessorJava.tokenize(normalized);
+            List<KoreanTokenJava> res_nouns = OpenKoreanTextProcessorJava.tokensToJavaKoreanTokenList(tokens);
+
+            for (int f = 0; f < res_nouns.size(); f++) {
+                if (res_nouns.get(f).getPos() == KoreanPosJava.Noun) {
+                    arr.add(res_nouns.get(f).getText());
+                }
+            }
+            res[0][i] = arr.toArray();
+        }
+        array_res = res;
+        return array_res;
+    }
 }

@@ -68,9 +68,10 @@ def vectors_pn(document_list):
 def compute_similarity(*input_list):
     #각 백터끼리의 코사인 유사도를 구함
     res_string = ""
-    temp = [list(input_list)]
+    #temp = [list(input_list)]
     document_embedding_list = data_list[1] #recipe_vector
-    input_list_vec = vectors_pn(temp) #input_words
+    #input_list_vec = vectors_pn(temp) #input_words
+    input_list_vec = test(*input_list) #input_words
 
     from sklearn.metrics.pairwise import cosine_similarity
     cosine_similarities = cosine_similarity(input_list_vec, document_embedding_list)
@@ -87,3 +88,15 @@ def compute_similarity(*input_list):
         out_temp = sim_scores[i][0] + 1
         res_string = res_string + str(out_temp) + "/"
     return res_string
+
+def test(*input):
+    res = None
+    for i in range(len(input)):
+        for j in range(len(input[i])):
+            if(res is None):
+                res = vectors_pn(input[i][j])[0]
+            else:
+                res = res + vectors_pn(input[i][j])[0]
+    res = [res]
+    print(res)
+    return res

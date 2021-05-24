@@ -83,6 +83,7 @@ public class Fragment2 extends Fragment {
         for(int i = 0; i < size; i++){
             mAdapter.addData(saveDate.get(i));
         }
+//////////////
 
         String[] res;
         Object[] arg = new Object[]{"물"};
@@ -102,7 +103,7 @@ public class Fragment2 extends Fragment {
             }
             res = MainActivity.compute_sim(arg, getActivity());
             System.out.println("compute_sim Complete");
-
+/////////
             recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity()));
             rAdapter = new RecipeAdapter(RcTable);
             recyclerView2.setAdapter(rAdapter);
