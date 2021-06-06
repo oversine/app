@@ -2,7 +2,7 @@ package com.example.barcode;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-
+//db 생성하는 코드(한곳에 모아두기 위해 내부 클래스 사용)
 public class RoomDBClasses {
 
     @Database(entities = {DbClasses.Barcode.class}, version = 1, exportSchema = false)
