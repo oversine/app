@@ -90,13 +90,13 @@ public class Fragment2 extends Fragment {
 //////////////
 
         String[] res;
-        Object[] arg = new Object[]{"물"};
+        Object[] arg = new Object[]{"물"}; //냉장고에 식재료가 없으면 기본값으로 물 설정
         try {
             Object[] temp;
-            temp = Product_Database.getInstance(getActivity()).daoSave().getPdName().toArray();
+            temp = Product_Database.getInstance(getActivity()).daoSave().getPdName().toArray(); //보관중인 식재료 가져오기
 
-            if(temp.length > 0){
-                temp = MainActivity.get_nouns(temp);
+            if(temp.length > 0){//식재료 수 만큼
+                temp = MainActivity.get_nouns(temp); // 식재료명에서 명사만 추출
                 arg = temp;
             }
         }catch(Exception e) {
@@ -107,7 +107,7 @@ public class Fragment2 extends Fragment {
             for(int i =0; i<arg.length;i++){
                 System.out.print(arg[i]);
             }
-            res = MainActivity.compute_sim(arg, getActivity());
+            res = MainActivity.compute_sim(arg, getActivity()); // 식재료명으로 유사도 계산
             System.out.println("compute_sim Complete");
 /////////
             recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity()));

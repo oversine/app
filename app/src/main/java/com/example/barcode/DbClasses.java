@@ -1,19 +1,19 @@
 package com.example.barcode;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
+//db클래스(db관련 클래스를 한곳에 모아두기 위해 내부 클래스 사용)
 public class DbClasses {
-
+    //barcode_db 클래스
     @Entity(tableName = "Barcode")
     public class Barcode{
+        //속성 정의
         @PrimaryKey
         @NonNull
         public String barcode;
         public String productname;
-
+        //getter, setter
         public String getProductname() { return productname; }
 
         public void setProductname(String productname) { this.productname = productname; }
@@ -33,7 +33,7 @@ public class DbClasses {
         public void setProductName(String productName) {
             productname = productName;
         }
-
+        //string 메소드 override
         @Override
         public String toString() {
             return "Barcode{" +
