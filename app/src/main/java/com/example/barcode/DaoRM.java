@@ -1,6 +1,5 @@
 package com.example.barcode;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 

@@ -1,5 +1,6 @@
 package com.example.barcode;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,10 +33,13 @@ public class Fragment2 extends Fragment {
     private LinearLayoutManager mLayoutManager;
     private Date listDate;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         PreferenceManager.setDefaultValues(getActivity(), R.xml.settings_preference, false);
+
+
 
         Button scanBtn = view.findViewById(R.id.barcode_scan);
 

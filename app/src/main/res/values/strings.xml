@@ -6,5 +6,7 @@
     <string name="textview">TextView</string>
     <string name="button">Button</string>
     <string name="search">search</string>
+    <string name="pdname">상품명</string>
+    <string name="idname">식재료명</string>
     <string name="StringValue">이미지가 열리지 않습니다.</string>
 </resources>

@@ -44,10 +44,18 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/resultVideo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/StringValue"
+        android:src="@drawable/ic_baseline_smart_display_24"/>
+
+
+    <ImageView
         android:id="@+id/PdDelete"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="20dp"
         android:contentDescription="@string/StringValue"
         android:src="@drawable/ic_baseline_highlight_off_24"/>
 </LinearLayout>

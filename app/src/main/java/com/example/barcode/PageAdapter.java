@@ -33,7 +33,7 @@ public class PageAdapter extends FragmentPagerAdapter {
         name.add("과일");
         name.add("육류");
         name.add("수산물");
-        name.add("유제품");
+        name.add("유제품"); // 각 카테고리를 배열에 추가하여 수동등록 식재료 아이콘 선택 카테고리 리스트 구현
     }
 
     @Nullable

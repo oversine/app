@@ -69,7 +69,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = getBindingAdapterPosition();
+                    int pos = getBindingAdapterPosition(); // 수동등록의 특정 식재료 아이콘 선택 시 선택 아이템 위치를 찾아내어 해당 아이템의 식품명, 아이콘 이미지 주소, 기본 유통기한 값을 수동 등록 액티비티로 넘겨준다.
                     Manual_Res manual_res = Manual_Res.manual_res;
                     if (pos != RecyclerView.NO_POSITION) {
                         Intent intent = new Intent(v.getContext(), Manual_Res.class);

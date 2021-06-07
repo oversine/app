@@ -30,7 +30,7 @@ public class scan extends AppCompatActivity {
             } else {
                 Intent intent = new Intent(this, barcode_res.class);
                 intent.putExtra("바코드값", result.getContents());
-                startActivity(intent);
+                startActivity(intent); // 인식 결과로 DB에 일치한 바코드 값이 없어 null을 반환한 경우 재인식을 요청하고, 상품명을 받아온 경우 결과 액티비티로 값을 넘겨줌
             }
             finish();
         } else {

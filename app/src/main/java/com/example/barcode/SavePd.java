@@ -13,9 +13,9 @@ public class SavePd {
 
     private String PdName; // 상품명
     private String PdDate; // 유통기한 날짜
-    private String PdImg;
+    private String PdImg; // 식재료 아이콘 이미지 주소
     private Date MainDate; // 유통기한 날짜 Date 타입
-    private String PdDay;
+    private String PdDay; // 메인화면 임박 식재료 년도 제외 날자 표기
 
 
     public SavePd(String PdName, String PdDate, String PdImg, Date MainDate, String PdDay) {

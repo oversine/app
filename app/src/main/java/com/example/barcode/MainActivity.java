@@ -25,8 +25,12 @@ import org.openkoreantext.processor.OpenKoreanTextProcessorJava;
 import org.openkoreantext.processor.tokenizer.KoreanTokenizer;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -38,7 +42,11 @@ public class MainActivity extends AppCompatActivity {
     DatabaseBuilder builder;
     SqlConnect sqlConnect;
     public static Context context;
+    private Date mainDate, pushDate;
+
     File fileb; File filep; File fileba; File filem;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.Theme_Barcode);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // 밤에 실행시 다크 모드 관련 실행직후 검은화면 뜨는 문제 해결 필요
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // 앱 다크모드 off
+
 
         ////////////////////////////////////// 앱 시작시 php서버에 접속하여 db를 불러와 room에 저장
         String base_path = "/data/data/com.example.barcode/databases/";
@@ -77,14 +86,14 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivity.init_python(this); //init_python
         mBottomNV = findViewById(R.id.navigation);
-        mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
+        mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { // 하단 네비게이션 바 선택 시
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 BottomNavigate(menuItem.getItemId());
                 return true;
             }
         });
-        mBottomNV.setSelectedItemId(R.id.home);
+        mBottomNV.setSelectedItemId(R.id.home); // 네비게이션 바 기본 선택 값
 
         findViewById(R.id.menuSet).setOnClickListener(new View.OnClickListener() { // 북마크, 수동 등록, 설정 팝업메뉴
             @Override
@@ -95,15 +104,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                             if (item.getItemId() == R.id.action_menu1){
-                                Intent intent = new Intent(MainActivity.this, Manual_Res.class);
+                                Intent intent = new Intent(MainActivity.this, Manual_Res.class); // 네비게이션 바 팝업 메뉴 수동 등록
                                 startActivity(intent);
                                 return true;
                             }else if(item.getItemId() == R.id.action_menu2){
-                                Intent intent1 = new Intent(MainActivity.this, Bookmarks.class);
+                                Intent intent1 = new Intent(MainActivity.this, Bookmarks.class); // 네비게이션 바 팝업 메뉴 북마크
                                 startActivity(intent1);
                                 return true;
                             }else {
-                                Intent intent2 = new Intent(MainActivity.this, SetActivity.class);
+                                Intent intent2 = new Intent(MainActivity.this, SetActivity.class); // 네비게이션 바 팝업 메뉴 설정
                                 startActivity(intent2);
                             }
                         return false;
@@ -112,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 popupMenu.show();
             }
         });
-    }
+      }
     ////////////////python execution
     public static void init_python(Context context) {
         if (!Python.isStarted()) {

@@ -53,7 +53,10 @@ public class barcode_res extends AppCompatActivity {
             // 날짜를 출력하는 텍스트뷰에 오늘 날짜 설정.
             tv = findViewById(R.id.date);
              Calendar cal = Calendar.getInstance();
-             tv.setText(cal.get(Calendar.YEAR) +"-"+ (cal.get(Calendar.MONTH)+1) +"-"+ cal.get(Calendar.DATE));
+             int year = cal.get(Calendar.YEAR);
+             int month = cal.get(Calendar.MONTH) + 1;
+             int day = cal.get(Calendar.DATE);
+              tv.setText(String.format("%02d-%02d-%02d", year,month,day));
 
             save = findViewById(R.id.save);
             save.setOnClickListener(new View.OnClickListener() {

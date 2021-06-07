@@ -24,7 +24,7 @@ public class SetPreferenceFragment extends PreferenceFragmentCompat {
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         if(!prefs.getString("userData_list", "").equals("")){
-            dataPreference.setSummary(prefs.getString("userData_list","7"));
+            dataPreference.setSummary(prefs.getString("userData_list","7")); // 유통기한 알림 기본 설정 값 7일 설정
         }
 
         prefs.registerOnSharedPreferenceChangeListener(prefListener);

@@ -37,7 +37,7 @@ public class Recipe_result extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_result);
 
         Intent intent = getIntent();
-        String code = intent.getStringExtra("레시피코드");
+        String code = intent.getStringExtra("레시피코드"); // 선택한 레시피 코드를 넘겨받아 코드에 해당하는 요구 식재료와 조리 과정을 리사이클러뷰로 출력
 
         String result_RcName = DatabaseBuilder.RecipeB_DB.DaoRB().search_RecipeName(code);
 
@@ -80,7 +80,7 @@ public class Recipe_result extends AppCompatActivity {
         delete_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)MainActivity.context).BottomNavigate(R.id.frige);
+                ((MainActivity)MainActivity.context).BottomNavigate(R.id.frige); // 소모 식재료 제거 버튼 선택 시 식재료 보관 프래그먼트로 이동
                finish();
             }
         });

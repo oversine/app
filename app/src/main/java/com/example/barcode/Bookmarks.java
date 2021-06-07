@@ -41,7 +41,7 @@ public class Bookmarks extends AppCompatActivity {
         if(actionBar != null) {
             actionBar.setDisplayShowCustomEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
-        }
+        } // 기본적으로 앱에서 액션바를 false 해뒀으나 레시피 프래그먼트에서 액션바를 사용해 검색기능을 구현하기 위해 액션바를 해당 프래그먼트에 한정하여 활성화함
         recyclerView = findViewById(R.id.recyclerView_bookmark);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -88,7 +88,7 @@ public class Bookmarks extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                rAdapter.getFilter().filter(newText);
+                rAdapter.getFilter().filter(newText); // 액션바에 구현된 검색 아이콘을 선택해 키워드를 입력했을 때 해당 키워드와 일치하는 값만 리스트에 추가
                 return false;
             }
         });

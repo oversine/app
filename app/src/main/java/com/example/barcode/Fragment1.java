@@ -41,13 +41,13 @@ public class Fragment1 extends Fragment {
         return view;
     }
     @Override
-    public void onResume() {
+    public void onResume() { // 프래그먼트 생명주기를 이용해 다른 액티비티에서 다시 프래그먼트로 돌아왔을 때 하단의 코드를 다시 실행함
         super.onResume();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
 
-        table = Product_Database.getInstance(getActivity()).daoSave().getAll();
+        table = Product_Database.getInstance(getActivity()).daoSave().getAll(); // 식재료 저장 DB에서 값을 가져와 해당 값 만큼 반복하여 리사이클러뷰를 출력함
         int size = table.size();
         for(int i = 0; i < size; i++){
             adapter.addData(table.get(i));

@@ -3,6 +3,7 @@ package com.example.barcode;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         private TextView ProductDate;
         private ImageView img;
         private ImageView Item_delete;
+        private ImageView result;
 
         public ItemViewHolder(@NonNull View itemView){
             super(itemView);
@@ -76,7 +78,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
             ProductDate = itemView.findViewById(R.id.PdDate);
             img = itemView.findViewById(R.id.imageView);
             Item_delete = itemView.findViewById(R.id.PdDelete);
-
+            result = itemView.findViewById(R.id.resultVideo);
 
             Item_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,8 +88,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
 
                     if (pos != RecyclerView.NO_POSITION) {
                         removeItem(pos);
-                        setData(listdata);
+                        setData(listdata); // 삭제 버튼을 눌렀을 때 현재 위치의 리사이클러뷰 아이템을 삭제하고, 리사이클러뷰를 재정렬한 뒤에 DB의 해당 식재료 삭제
                         Product_Database.getInstance(Item_delete.getContext()).daoSave().delete(savePd);
+                    }
+                }
+            });
+
+            result.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getBindingAdapterPosition();
+                    String name = listdata.get(pos).getPdName();
+                    String url = "https://www.youtube.com/results?search_query=" + name + " 레시피"; // 특정한 저장된 식재료 아이템의 유튜브 아이콘을 선택한 경우 해당 식재료명과 레시피 키워드를 합하여 검색결과를 출력함
+                    if (pos != RecyclerView.NO_POSITION) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        v.getContext().startActivity(intent);
                     }
                 }
             });

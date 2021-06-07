@@ -33,7 +33,7 @@ public class FragmentItem1 extends Fragment {
         recyclerView.setAdapter(iAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), 1));
 
-        select_Item = Select_Item_Database.getInstance(getActivity()).daoItem().getAll();
+        select_Item = Select_Item_Database.getInstance(getActivity()).daoItem().getAll(); // FragmentItem1~7 까지 getAll~7(); 에서 카테고리가 일치하는 식재료 아이콘만 불러와 카테고리 별로 정렬
         int size = select_Item.size();
         for (int i = 0; i < size; i++) {
             iAdapter.addItem(select_Item.get(i));
